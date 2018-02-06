@@ -3,7 +3,7 @@
 import junit.framework.TestCase;
 import models.Challenge;
 import models.User;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.Date;
 

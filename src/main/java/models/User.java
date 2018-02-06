@@ -1,6 +1,6 @@
 package models;
 
-import administration.jpa.daos.AbstractDatabaseEntity;
+import administration.daos.AbstractDatabaseEntity;
 import utilities.MathUtils;
 
 import javax.persistence.*;

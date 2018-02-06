@@ -1,4 +1,4 @@
-package administration.jpa.daos;
+package administration.daos;
 
 /**
  * Created by Max on 28.05.2017.

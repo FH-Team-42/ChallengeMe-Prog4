@@ -1,7 +1,7 @@
-package administration.jpa.daos;
+package administration.daos;
 
-import model.challenges.Challenge;
-import model.profile.User;
+import models.Challenge;
+import models.User;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

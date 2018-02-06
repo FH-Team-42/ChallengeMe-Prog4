@@ -2,7 +2,7 @@ package models;
 
 import javax.persistence.*;
 
-import administration.jpa.daos.AbstractDatabaseEntity;
+import administration.daos.AbstractDatabaseEntity;
 //import administration.timerListener;
 
 import javax.swing.*;
