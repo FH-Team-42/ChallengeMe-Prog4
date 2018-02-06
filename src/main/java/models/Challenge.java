@@ -6,8 +6,9 @@ import administration.daos.AbstractDatabaseEntity;
 //import administration.timerListener;
 
 import javax.swing.*;
+import java.util.Date;
 
-@Entity (name = "challenges")
+@Entity
 public class Challenge extends AbstractDatabaseEntity{
 
     @Column
@@ -22,7 +23,6 @@ public class Challenge extends AbstractDatabaseEntity{
     @Column
     private int idCreator;      //ID of challenge creator in database
 
-    @Column
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int idChallenge;    //ID of challenge in database
@@ -32,6 +32,17 @@ public class Challenge extends AbstractDatabaseEntity{
 
     @Column
     private int vote;           //votes of the challenge, delete challenges with too much negative votes
+
+    @Column
+    private boolean isCompleted;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private int createdAt;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private int updatedAt;
 
 
     //connectDataBase database = new connectDataBase(); //connection to the database
@@ -190,6 +201,12 @@ public class Challenge extends AbstractDatabaseEntity{
         idChallenged = setChallengedId;
 
     }
+
+    @PrePersist
+    void onCreate() { this.setCreated( new Date() ); }
+
+    @PreUpdate
+    void onUpdate() { this.setUpdated( new Date() ); }
 
     /**
      * Vote the challenge

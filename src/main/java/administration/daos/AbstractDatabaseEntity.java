@@ -14,15 +14,16 @@ public abstract class AbstractDatabaseEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
+    protected Long id;
 
     @Version
-    private Long version;
+    protected Long version;
+
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    protected Date created;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date modified;
+    protected Date updated;
 
     public AbstractDatabaseEntity() {}
 
@@ -48,12 +49,12 @@ public abstract class AbstractDatabaseEntity
 
     public Date getModified()
     {
-        return modified;
+        return updated;
     }
 
-    public void setModified(Date modified)
+    public void setUpdated(Date updated)
     {
-        this.modified = modified;
+        this.updated = updated;
     }
 
     public Long getVersion()
@@ -82,7 +83,7 @@ public abstract class AbstractDatabaseEntity
     void onUpdate()
     {
         System.out.println( "OnUpdate" );
-        this.setModified( new Date() );
+        this.setUpdated( new Date() );
     }
 
     @Override
@@ -91,7 +92,7 @@ public abstract class AbstractDatabaseEntity
                 "id=" + id +
                 ", created=" + created +
                 ", version=" + version +
-                ", modified=" + modified +
+                ", updated=" + updated +
                 '}';
     }
 

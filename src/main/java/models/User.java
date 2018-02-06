@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by Felix on 02.01.2017.
  */
 
-@Entity (name = "users")
+@Entity
 public class User extends AbstractDatabaseEntity{
 
     @Column
@@ -29,14 +29,28 @@ public class User extends AbstractDatabaseEntity{
     private int challengesCompleted;    //count of the challenges the user hat completed
 
     @Column
-    private int challengeAssigned;      //ID of the assigned challenge
+    private int challengeCurrent;      //ID of the assigned challenge
 
     @Column
     private int reputation;
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int userID;                 //UserID in database
+
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private int createdAt;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private int updatedAt;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private int lastLogin;
+
     //private connectDataBase database;   //connection to the database
 
     public User(){
@@ -60,7 +74,7 @@ public class User extends AbstractDatabaseEntity{
         birthday = day;
         profilePic = "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
         challengesCompleted = 0;
-        challengeAssigned = 0;
+        challengeCurrent = 0;
         reputation = 100;
         /*if (!database.dataBaseQueryString("SELECT username FROM users WHERE username='" + username + "'", "username").equals(username)) {
             userID = generateUserID();
@@ -82,10 +96,10 @@ public class User extends AbstractDatabaseEntity{
      */
     public int setNewChallenge() {
         int newID;
-        if (challengeAssigned == 0) {
+        if (challengeCurrent == 0) {
             //generate new challenge
             newID = MathUtils.getRandomInt(100)+1;
-            challengeAssigned = newID;
+            challengeCurrent = newID;
             return newID;
         } else {
             //user already has a challenge assigned, return a nope
@@ -99,9 +113,9 @@ public class User extends AbstractDatabaseEntity{
      * @return If giving up was successful
      */
     public int giveUp() {
-        if (challengeAssigned != 0) {
+        if (challengeCurrent != 0) {
             //challengeAddToDatabase(user.challengeAssigned);     //will be added to control unit
-            challengeAssigned = 0;
+            challengeCurrent = 0;
             return 1;
         } else {
             reputation -= 2;
@@ -196,6 +210,13 @@ public class User extends AbstractDatabaseEntity{
         this.birthday = birthday;
 
     }
+
+    @PrePersist
+    void onCreate() { this.setCreated( new Date() ); }
+
+    @PreUpdate
+    void onUpdate() { this.setUpdated( new Date() ); }
+
 
     public void voteForUser(int vote){
         reputation += vote;
