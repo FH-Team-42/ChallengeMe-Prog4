@@ -12,12 +12,12 @@ import java.util.Collection;
 /**
  * Created by Max on 09.07.2017.
  */
-public class ChallengeController {
+public class StorageController {
 
     IGenericDao<Challenge> challengeDao = null;
     IGenericDao<User> userDao = null;
 
-    public ChallengeController() {
+    public StorageController() {
         challengeDao = DataController.getInstance().getChallengeDao();
         userDao = DataController.getInstance().getUserDao();
     }
@@ -37,4 +37,13 @@ public class ChallengeController {
     public ArrayList<User> getAllUsers() {
         return new ArrayList<User>( userDao.findAll());
     }
+
+    public Challenge findChallengeById(Long id) {
+        return challengeDao.findById(id);
+    }
+
+    public void updateChallenge(Challenge challenge) {
+        challengeDao.update(challenge);
+    }
+
 }
