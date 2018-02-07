@@ -211,12 +211,6 @@ public class User extends AbstractDatabaseEntity{
 
     }
 
-    @PrePersist
-    void onCreate() { this.setCreated( new Date() ); }
-
-    @PreUpdate
-    void onUpdate() { this.setUpdated( new Date() ); }
-
 
     public void voteForUser(int vote){
         reputation += vote;

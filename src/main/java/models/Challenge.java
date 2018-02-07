@@ -22,7 +22,7 @@ public class Challenge extends AbstractDatabaseEntity{
     private int completionTime; //time to complete challenge
 
     @Column
-    private int idCreator;      //ID of challenge creator in database
+    private Long idCreator;      //ID of challenge creator in database
 
     //@Id
     //@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -60,13 +60,15 @@ public class Challenge extends AbstractDatabaseEntity{
      * @param completionTime The time to complete the challenge in seconds
      * @param idCreator      User-ID of user creating the challenge
      */
-    public Challenge(String title, String description, int completionTime, int idCreator) {
+    public Challenge(String title, String description, int completionTime, Long idCreator) {
         this.title = title;
         this.description = description;
         this.completionTime = completionTime;
         this.idCreator = idCreator;
         idChallenged = 0;
         vote = 0;
+        createdAt = new Date();
+        updatedAt = new Date();
        /* if (!database.dataBaseQueryString("SELECT * FROM challenges WHERE title='" + this.title + "'", "title").equals(this.title)) {
             idChallenge = getNewChallengeID();
             String insertString = "INSERT INTO challenges (ChallengeID, challenged, creator, title, description, completionTime, votes) VALUES("
@@ -119,7 +121,7 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenge creator's ID
      */
-    public int getCreatorId() {
+    public Long getCreatorId() {
     	return idCreator;
 
     }
@@ -163,6 +165,24 @@ public class Challenge extends AbstractDatabaseEntity{
     }
 
     /**
+     * Get creation date
+     *
+     * @return The date of creation of the challenge
+     */
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Get last update date
+     *
+     * @return The date of the last update of the challenge
+     */
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    /**
      * Set the title of the challenge
      *
      * @param setTitle The new title
@@ -201,12 +221,6 @@ public class Challenge extends AbstractDatabaseEntity{
         idChallenged = setChallengedId;
 
     }
-
-    @PrePersist
-    void onCreate() { this.setCreated( new Date() ); }
-
-    @PreUpdate
-    void onUpdate() { this.setUpdated( new Date() ); }
 
     /**
      * Vote the challenge

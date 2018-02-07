@@ -47,7 +47,7 @@ public abstract class AbstractDatabaseEntity
         this.id = id;
     }
 
-    public Date getModified()
+    public Date getUpdated()
     {
         return updated;
     }
