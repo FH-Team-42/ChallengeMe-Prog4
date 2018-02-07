@@ -6,8 +6,10 @@ import administration.daos.AbstractDatabaseEntity;
 //import administration.timerListener;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-@Entity (name = "challenges")
+@Entity
 public class Challenge extends AbstractDatabaseEntity{
 
     @Column
@@ -22,16 +24,26 @@ public class Challenge extends AbstractDatabaseEntity{
     @Column
     private int idCreator;      //ID of challenge creator in database
 
-    @Column
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idChallenge;    //ID of challenge in database
+    //@Id
+    //@GeneratedValue (strategy = GenerationType.IDENTITY)
+    //private int idChallenge;    //ID of challenge in database
 
     @Column
     private int idChallenged;   //ID of the user which is assigned this challenge
 
     @Column
     private int vote;           //votes of the challenge, delete challenges with too much negative votes
+
+    @Column
+    private boolean isCompleted;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date createdAt;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date updatedAt;
 
 
     //connectDataBase database = new connectDataBase(); //connection to the database
@@ -79,9 +91,9 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return Free challenge ID
      */
-    public int getNewChallengeID() {
-        return idChallenge;
-    }
+    //public int getNewChallengeID() {
+    //    return idChallenge;
+    //}
 
     /**
      * Get the title of the challenge
@@ -117,10 +129,9 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenge's ID
      */
-    public int getChallengeId() {
-    	return idChallenge;
-
-    }
+    //public int getChallengeId() {
+    //	return idChallenge;
+    //}
 
     /**
      * Get the challenged person's user ID
@@ -190,6 +201,12 @@ public class Challenge extends AbstractDatabaseEntity{
         idChallenged = setChallengedId;
 
     }
+
+    @PrePersist
+    void onCreate() { this.setCreated( new Date() ); }
+
+    @PreUpdate
+    void onUpdate() { this.setUpdated( new Date() ); }
 
     /**
      * Vote the challenge
