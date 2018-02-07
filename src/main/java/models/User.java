@@ -64,8 +64,6 @@ public class User extends AbstractDatabaseEntity{
      * @param name  The username
      * @param pass  The users password hash, encrypted with SHA-256
      * @param day   The users birthday
-     * @param month The users birthmonth
-     * @param year  The users birthyear
      */
     public User(String name, String pass, Date day) {
         //database = new connectDataBase();

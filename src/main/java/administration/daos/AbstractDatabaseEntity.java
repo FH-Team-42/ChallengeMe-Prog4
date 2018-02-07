@@ -25,14 +25,14 @@ public abstract class AbstractDatabaseEntity
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updated;
 
-    public AbstractDatabaseEntity() {}
+    protected AbstractDatabaseEntity() {}
 
     public Date getCreated()
     {
         return created;
     }
 
-    public void setCreated(Date created)
+    private void setCreated(Date created)
     {
         this.created = created;
     }
