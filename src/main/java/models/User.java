@@ -34,22 +34,22 @@ public class User extends AbstractDatabaseEntity{
     @Column
     private int reputation;
 
-    @Id
-    @GeneratedValue
-    private int userID;                 //UserID in database
+    //@Id
+    //@GeneratedValue
+    //private int userID;                 //UserID in database
 
 
     @Column
     @Temporal( TemporalType.TIMESTAMP )
-    private int createdAt;
+    private Date createdAt;
 
     @Column
     @Temporal( TemporalType.TIMESTAMP )
-    private int updatedAt;
+    private Date updatedAt;
 
     @Column
     @Temporal( TemporalType.TIMESTAMP )
-    private int lastLogin;
+    private Date lastLogin;
 
     //private connectDataBase database;   //connection to the database
 
@@ -167,9 +167,9 @@ public class User extends AbstractDatabaseEntity{
      *
      * @return The users ID
      */
-    public int getUserID() {
-        return userID;
-    }
+    //public int getUserID() {
+    //    return userID;
+    //}
 
     /**
      * Returns the users reputation
@@ -185,20 +185,20 @@ public class User extends AbstractDatabaseEntity{
      *
      * @param name The username
      */
-    public void setName(String name) {
-        username = name;
-        String query = "UPDATE users SET username='" + name +  "' WHERE userID=" + userID;
-    }
+    //public void setName(String name) {
+    //    username = name;
+    //    String query = "UPDATE users SET username='" + name +  "' WHERE userID=" + userID;
+    //}
 
     /**
      * Sets the users Password
      *
      * @param pass The password
      */
-    public void setPass(String pass) {
-        password = pass;
-        String query = "UPDATE users SET password='" + pass +  "' WHERE userID=" + userID;
-    }
+    //public void setPass(String pass) {
+    //    password = pass;
+    //    String query = "UPDATE users SET password='" + pass +  "' WHERE userID=" + userID;
+    //}
 
 
     /**

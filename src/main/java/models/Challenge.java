@@ -6,6 +6,7 @@ import administration.daos.AbstractDatabaseEntity;
 //import administration.timerListener;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,9 +24,9 @@ public class Challenge extends AbstractDatabaseEntity{
     @Column
     private int idCreator;      //ID of challenge creator in database
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idChallenge;    //ID of challenge in database
+    //@Id
+    //@GeneratedValue (strategy = GenerationType.IDENTITY)
+    //private int idChallenge;    //ID of challenge in database
 
     @Column
     private int idChallenged;   //ID of the user which is assigned this challenge
@@ -38,11 +39,11 @@ public class Challenge extends AbstractDatabaseEntity{
 
     @Column
     @Temporal( TemporalType.TIMESTAMP )
-    private int createdAt;
+    private Date createdAt;
 
     @Column
     @Temporal( TemporalType.TIMESTAMP )
-    private int updatedAt;
+    private Date updatedAt;
 
 
     //connectDataBase database = new connectDataBase(); //connection to the database
@@ -90,9 +91,9 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return Free challenge ID
      */
-    public int getNewChallengeID() {
-        return idChallenge;
-    }
+    //public int getNewChallengeID() {
+    //    return idChallenge;
+    //}
 
     /**
      * Get the title of the challenge
@@ -128,10 +129,9 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenge's ID
      */
-    public int getChallengeId() {
-    	return idChallenge;
-
-    }
+    //public int getChallengeId() {
+    //	return idChallenge;
+    //}
 
     /**
      * Get the challenged person's user ID
