@@ -50,7 +50,7 @@ public class DataController
                 this.entityManagerFactory.createEntityManager() );
     }
 
-    public IGenericDao<User> getAddressDao()
+    public IGenericDao<User> getUserDao()
     {
         return new GenericDao<User>( User.class,
                 this.entityManagerFactory.createEntityManager() );
