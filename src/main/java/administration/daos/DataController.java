@@ -17,7 +17,7 @@ import javax.persistence.Persistence;
  */
 public class DataController
 {
-    private static final String PERSISTENCE_UNIT_NAME = "addressbook-unit";
+    private static final String PERSISTENCE_UNIT_NAME = "challenge_me";
 
     private EntityManagerFactory entityManagerFactory;
 
@@ -50,7 +50,7 @@ public class DataController
                 this.entityManagerFactory.createEntityManager() );
     }
 
-    public IGenericDao<User> getAddressDao()
+    public IGenericDao<User> getUserDao()
     {
         return new GenericDao<User>( User.class,
                 this.entityManagerFactory.createEntityManager() );

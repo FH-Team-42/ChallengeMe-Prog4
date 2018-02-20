@@ -6,8 +6,10 @@ import administration.daos.AbstractDatabaseEntity;
 //import administration.timerListener;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-@Entity (name = "challenges")
+@Entity
 public class Challenge extends AbstractDatabaseEntity{
 
     @Column
@@ -20,18 +22,28 @@ public class Challenge extends AbstractDatabaseEntity{
     private int completionTime; //time to complete challenge
 
     @Column
-    private int idCreator;      //ID of challenge creator in database
+    private Long idCreator;      //ID of challenge creator in database
 
-    @Column
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int idChallenge;    //ID of challenge in database
+    //@Id
+    //@GeneratedValue (strategy = GenerationType.IDENTITY)
+    //private int idChallenge;    //ID of challenge in database
 
     @Column
     private int idChallenged;   //ID of the user which is assigned this challenge
 
     @Column
     private int vote;           //votes of the challenge, delete challenges with too much negative votes
+
+    @Column
+    private boolean isCompleted;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date createdAt;
+
+    @Column
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date updatedAt;
 
 
     //connectDataBase database = new connectDataBase(); //connection to the database
@@ -48,13 +60,15 @@ public class Challenge extends AbstractDatabaseEntity{
      * @param completionTime The time to complete the challenge in seconds
      * @param idCreator      User-ID of user creating the challenge
      */
-    public Challenge(String title, String description, int completionTime, int idCreator) {
+    public Challenge(String title, String description, int completionTime, Long idCreator) {
         this.title = title;
         this.description = description;
         this.completionTime = completionTime;
         this.idCreator = idCreator;
         idChallenged = 0;
         vote = 0;
+        createdAt = new Date();
+        updatedAt = new Date();
        /* if (!database.dataBaseQueryString("SELECT * FROM challenges WHERE title='" + this.title + "'", "title").equals(this.title)) {
             idChallenge = getNewChallengeID();
             String insertString = "INSERT INTO challenges (ChallengeID, challenged, creator, title, description, completionTime, votes) VALUES("
@@ -79,9 +93,9 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return Free challenge ID
      */
-    public int getNewChallengeID() {
-        return idChallenge;
-    }
+    //public int getNewChallengeID() {
+    //    return idChallenge;
+    //}
 
     /**
      * Get the title of the challenge
@@ -107,7 +121,7 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenge creator's ID
      */
-    public int getCreatorId() {
+    public Long getCreatorId() {
     	return idCreator;
 
     }
@@ -117,10 +131,9 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenge's ID
      */
-    public int getChallengeId() {
-    	return idChallenge;
-
-    }
+    //public int getChallengeId() {
+    //	return idChallenge;
+    //}
 
     /**
      * Get the challenged person's user ID
@@ -149,6 +162,24 @@ public class Challenge extends AbstractDatabaseEntity{
      */
     public int getCompletionTime() {
         return completionTime;
+    }
+
+    /**
+     * Get creation date
+     *
+     * @return The date of creation of the challenge
+     */
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     * Get last update date
+     *
+     * @return The date of the last update of the challenge
+     */
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
     /**
