@@ -24,11 +24,8 @@ public class ChallengesServlet extends HttpServlet {
 
             ArrayList<Challenge> challenges = controller.getAllChallenges();
             if(!challenges.isEmpty()) {
-                for(Challenge c : challenges) {
-                    c.setCompletionTime(250);
-                    controller.updateChallenge(c);
-                    response.getWriter().println("ID: " + c.getId() + ", Creation Date: " + c.getCreatedAt() + ", Completion Time: " + c.getCompletionTime() + ", Update Date: " + c.getUpdated());
-                }
+                request.setAttribute("challengeList", challenges);
+                request.getRequestDispatcher("challenges.jsp").forward(request, response);
             } else {
                 response.getWriter().print("No challenges in Database");
             }
