@@ -1,3 +1,4 @@
+package data;
 
 import models.Challenge;
 import models.User;

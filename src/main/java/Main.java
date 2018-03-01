@@ -1,6 +1,7 @@
 import administration.StorageController;
 import models.Challenge;
 import models.User;
+import data.DataProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -27,7 +27,7 @@ public class ChallengesServlet extends HttpServlet {
                 for(Challenge c : challenges) {
                     c.setCompletionTime(250);
                     controller.updateChallenge(c);
-                    response.getWriter().print("ID: " + c.getId() + ", Creation Date: " + c.getCreatedAt() + ", Completion Time: " + c.getCompletionTime() + ", Update Date: " + c.getUpdated());
+                    response.getWriter().println("ID: " + c.getId() + ", Creation Date: " + c.getCreatedAt() + ", Completion Time: " + c.getCompletionTime() + ", Update Date: " + c.getUpdated());
                 }
             } else {
                 response.getWriter().print("No challenges in Database");
