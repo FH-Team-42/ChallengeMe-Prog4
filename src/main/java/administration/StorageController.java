@@ -51,4 +51,9 @@ public class StorageController {
         challengeDao.update(challenge);
     }
 
+    public void updateUser(User user) {
+        userDao.update(user);
+    }
+
+
 }
