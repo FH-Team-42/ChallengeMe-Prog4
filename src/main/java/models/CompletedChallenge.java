@@ -1,15 +1,12 @@
 package models;
 
 import javax.persistence.*;
-import administration.daos.AbstractDatabaseEntity;
+
+import administration.daos.AbstractChallengeEntity;
 
 @Entity (name = "completed_challenges")
-public class CompletedChallenge extends AbstractDatabaseEntity {
+public class CompletedChallenge extends AbstractChallengeEntity {
 
-
-    @Id
-    @GeneratedValue
-    private int id;
 
     @Column
     private int userId;

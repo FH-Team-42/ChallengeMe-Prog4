@@ -17,17 +17,17 @@ public class Main {
         StorageController controller = new StorageController();
 
         Collection<User> users = provider.createTestUsers();
-        Collection<Challenge> challenges = provider.createTestChallenges();
-
         controller.createAllUsers(users);
+
+
+        Collection<Challenge> challenges = provider.createTestChallenges(controller.getUserById(new Long(1)).getUserId(), controller.getUserById(new Long(2)).getUserId(), controller.getUserById(new Long(3)).getUserId());
         controller.createAllChallenges(challenges);
 
         ArrayList<Challenge> challenge = controller.getAllChallenges();
+        ArrayList<User> allUser = controller.getAllUsers();
 
         for(Challenge c : challenge) {
-            c.setCompletionTime(250);
-            controller.updateChallenge(c);
-            System.out.println("ID: " + c.getId() + ", Creation Date: " + c.getCreatedAt() + ", Completion Time: " + c.getCompletionTime() + ", Update Date: " + c.getUpdated());
+            System.out.println("ID: " + c.getChallengeId() + ", Creator: " + c.getCreatorId() +", Creation Date: " + c.getCreated() +", Update Date: " + c.getUpdated());
         }
 
     }

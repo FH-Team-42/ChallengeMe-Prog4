@@ -18,9 +18,9 @@ public class StartupServlet implements ServletContextListener {
         StorageController controller = new StorageController();
 
         Collection<User> users = provider.createTestUsers();
-        Collection<Challenge> challenges = provider.createTestChallenges();
-
         controller.createAllUsers(users);
+
+        Collection<Challenge> challenges = provider.createTestChallenges(controller.getUserById(new Long(1)).getUserId(), controller.getUserById(new Long(2)).getUserId(), controller.getUserById(new Long(3)).getUserId());
         controller.createAllChallenges(challenges);
     }
 

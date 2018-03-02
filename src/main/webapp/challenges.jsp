@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="models.Challenge" %><%--
+<%@ page import="models.Challenge" %>
+<%--
   Created by IntelliJ IDEA.
   User: Max
   Date: 01.03.2018
@@ -30,11 +31,11 @@
     <!-- create an html table row -->
     <tr>
         <!-- create cells of row -->
-        <td scope="row"><% out.print(challenge.getId()); %></td>
+        <td scope="row"><% out.print(challenge.getChallengeId()); %></td>
         <td><% out.print(challenge.getTitle()); %></td>
         <td><% out.print(challenge.getDescription()); %></td>
         <td><% out.print(challenge.getCompletionTime()); %></td>
-        <td><% out.print(challenge.getCreatedAt()); %></td>
+        <td><% out.print(challenge.getCreated()); %></td>
         <td><% out.print(challenge.getCreatorId()); %></td>
         <td><% out.print(challenge.getChallengedId()); %></td>
         <!-- close row -->

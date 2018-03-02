@@ -22,7 +22,7 @@ import java.util.List;
     Anyone, who needs a Dao must therefore use our DataController class.
 
  */
-class GenericDao<T extends AbstractDatabaseEntity> implements IGenericDao<T>
+class GenericDao<T> implements IGenericDao<T>
 {
     private final Class<T> persistentClass;
     private EntityManager entityManager;

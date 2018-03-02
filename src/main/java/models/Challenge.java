@@ -2,15 +2,13 @@ package models;
 
 import javax.persistence.*;
 
-import administration.daos.AbstractDatabaseEntity;
+import administration.daos.AbstractChallengeEntity;
 //import administration.timerListener;
 
-import javax.swing.*;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-public class Challenge extends AbstractDatabaseEntity{
+public class Challenge extends AbstractChallengeEntity {
+
 
     @Column
     private String title;       //title of the challenge
@@ -24,26 +22,14 @@ public class Challenge extends AbstractDatabaseEntity{
     @Column
     private Long idCreator;      //ID of challenge creator in database
 
-    //@Id
-    //@GeneratedValue (strategy = GenerationType.IDENTITY)
-    //private int idChallenge;    //ID of challenge in database
-
     @Column
-    private int idChallenged;   //ID of the user which is assigned this challenge
+    private Long idChallenged;   //ID of the user which is assigned this challenge
 
     @Column
     private int vote;           //votes of the challenge, delete challenges with too much negative votes
 
     @Column
     private boolean isCompleted;
-
-    @Column
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date createdAt;
-
-    @Column
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date updatedAt;
 
 
     //connectDataBase database = new connectDataBase(); //connection to the database
@@ -60,15 +46,14 @@ public class Challenge extends AbstractDatabaseEntity{
      * @param completionTime The time to complete the challenge in seconds
      * @param idCreator      User-ID of user creating the challenge
      */
-    public Challenge(String title, String description, int completionTime, Long idCreator) {
+    public Challenge(String title, String description, int completionTime, long idCreator) {
         this.title = title;
         this.description = description;
         this.completionTime = completionTime;
         this.idCreator = idCreator;
-        idChallenged = 0;
+        idChallenged = (long) 0;
         vote = 0;
-        createdAt = new Date();
-        updatedAt = new Date();
+
        /* if (!database.dataBaseQueryString("SELECT * FROM challenges WHERE title='" + this.title + "'", "title").equals(this.title)) {
             idChallenge = getNewChallengeID();
             String insertString = "INSERT INTO challenges (ChallengeID, challenged, creator, title, description, completionTime, votes) VALUES("
@@ -131,7 +116,7 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenge's ID
      */
-    //public int getChallengeId() {
+    //public long getUserId() {
     //	return idChallenge;
     //}
 
@@ -140,7 +125,7 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenged person's user ID
      */
-    public int getChallengedId() {
+    public Long getChallengedId() {
     	return idChallenged;
 
     }
@@ -162,24 +147,6 @@ public class Challenge extends AbstractDatabaseEntity{
      */
     public int getCompletionTime() {
         return completionTime;
-    }
-
-    /**
-     * Get creation date
-     *
-     * @return The date of creation of the challenge
-     */
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     * Get last update date
-     *
-     * @return The date of the last update of the challenge
-     */
-    public Date getUpdatedAt() {
-        return updatedAt;
     }
 
     /**
@@ -217,7 +184,7 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @param setChallengedId The challenged user's ID
      */
-    public void setChallengedId(int setChallengedId) {
+    public void setChallengedId(Long setChallengedId) {
         idChallenged = setChallengedId;
 
     }

@@ -15,7 +15,7 @@ import java.util.List;
         Always use this interface as the reference type wherever you
         need to use the Dao!
      */
-public interface IGenericDao<T extends AbstractDatabaseEntity>
+public interface IGenericDao<T>
 {
     T findById( Long id );
     Collection<T> findAll();

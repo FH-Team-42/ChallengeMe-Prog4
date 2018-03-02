@@ -34,11 +34,16 @@ public class StorageController {
         userDao.createAll(users);
     }
 
+    public User getUserById(Long id) {
+        return userDao.findById(id);
+    }
+
     public ArrayList<User> getAllUsers() {
         return new ArrayList<User>( userDao.findAll());
     }
 
-    public Challenge findChallengeById(Long id) {
+    public Challenge getChallengeById(long id) {
+
         return challengeDao.findById(id);
     }
 

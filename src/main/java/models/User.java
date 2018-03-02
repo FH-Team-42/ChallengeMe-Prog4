@@ -1,6 +1,6 @@
 package models;
 
-import administration.daos.AbstractDatabaseEntity;
+import administration.daos.AbstractUserEntity;
 import utilities.MathUtils;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.util.Date;
  */
 
 @Entity
-public class User extends AbstractDatabaseEntity{
+public class User extends AbstractUserEntity {
 
     @Column
     private String username;
@@ -33,25 +33,6 @@ public class User extends AbstractDatabaseEntity{
 
     @Column
     private int reputation;
-
-    //@Id
-    //@GeneratedValue
-    //private int userID;                 //UserID in database
-
-
-    @Column
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date createdAt;
-
-    @Column
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date updatedAt;
-
-    @Column
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date lastLogin;
-
-    //private connectDataBase database;   //connection to the database
 
     public User(){
 
