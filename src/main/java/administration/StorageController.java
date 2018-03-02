@@ -51,4 +51,12 @@ public class StorageController {
         challengeDao.update(challenge);
     }
 
+    public void createChallenge (Challenge challenge) {
+        challengeDao.create(challenge);
+    }
+
+    public void createUser (User user) {
+        userDao.create(user);
+    }
+
 }

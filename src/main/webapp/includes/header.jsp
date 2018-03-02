@@ -16,7 +16,7 @@
 <body>
 
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="challenges" class="nav-link">Show Challenges</a></li>
-        <li class="nav-item"><a href="challenges" class="nav-link">Create Challenge</a></li>
+        <li class="nav-item"><a href="challenges" class="nav-link">Challenges anzeigen</a></li>
+        <li class="nav-item"><a href="create-challenge.jsp" class="nav-link">Challenge erstellen</a></li>
         <li class="nav-item"><a href="challenges" class="nav-link">Profile</a></li>
     </ul>
