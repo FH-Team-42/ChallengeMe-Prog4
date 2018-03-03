@@ -173,10 +173,10 @@ public class User extends AbstractUserEntity {
      *
      * @param name The username
      */
-    //public void setName(String name) {
-    //    username = name;
+    public void setName(String name) {
+        username = name;
     //    String query = "UPDATE users SET username='" + name +  "' WHERE userID=" + userID;
-    //}
+    }
 
     /**
      * Sets the users Password

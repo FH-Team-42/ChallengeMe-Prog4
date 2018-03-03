@@ -55,5 +55,9 @@ public class StorageController {
         userDao.update(user);
     }
 
+    public void createUser(User user) {
+        userDao.create(user);
+    }
+
 
 }
