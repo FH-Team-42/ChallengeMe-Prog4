@@ -26,17 +26,32 @@ public class ChallengesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
 
-            ArrayList<Challenge> challenges = controller.getAllChallenges();
-            if(!challenges.isEmpty()) {
-                request.setAttribute("challengeList", challenges);
-                request.getRequestDispatcher("challenges.jsp").forward(request, response);
-            } else {
-                response.getWriter().print("No challenges in Database");
-            }
-        } catch (Exception e) {
-            throw new ServletException(e);
+        String message = "";
+
+        switch(request.getParameter("action")) {
+            case "showAll":
+                ArrayList<Challenge> challenges = controller.getAllChallenges();
+                if(!challenges.isEmpty()) {
+                    request.setAttribute("challengeList", challenges);
+                    request.getRequestDispatcher("challenges.jsp").forward(request, response);
+                } else {
+                    response.getWriter().print("No challenges in Database");
+                }
+                break;
+            case "show":
+                long challengeId = Long.parseLong(request.getParameter("challengeId"));
+                Challenge desiredChallenge = controller.getChallengeById(challengeId);
+                if(desiredChallenge != null) {
+                    String creatorUsername = controller.getUserById(desiredChallenge.getIdCreator()).getName();
+                    request.setAttribute("creatorUsername", creatorUsername);
+                    request.setAttribute("desiredChallenge", desiredChallenge);
+                    request.getRequestDispatcher("single-challenge.jsp").forward(request, response);
+                } else {
+                    response.getWriter().print("There was an error with your Challenge");
+                }
+
+
         }
 
     }
@@ -47,12 +62,15 @@ public class ChallengesServlet extends HttpServlet {
         switch(request.getParameter("action")) {
             case "create":
                 message = createChallenge(request, response);
+                break;
         }
 
         HttpSession session = request.getSession();
         session.setAttribute("message", message);
         response.sendRedirect("index.jsp");
     }
+
+
     private String createChallenge(HttpServletRequest request, HttpServletResponse response) {
 
         String title = request.getParameter("title");
