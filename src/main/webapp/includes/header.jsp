@@ -19,4 +19,6 @@
         <li class="nav-item"><a href="challenges" class="nav-link">Show Challenges</a></li>
         <li class="nav-item"><a href="challenges" class="nav-link">Create Challenge</a></li>
         <li class="nav-item"><a href="profile" class="nav-link">Profile</a></li>
+        <li class="nav-item"><a href="index" class="nav-link">LogOut</a></li>
+
     </ul>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -29,17 +30,21 @@ public class ChangeProfileServlet extends HttpServlet {
     public ChangeProfileServlet()
     {
         controller = new StorageController();
-        testuserID = 1L;
-        //TODO USERID aus Session holen
-        actualUser = controller.getUserById(testuserID);
+
+
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            //Gets Sessions and load actual user ID
+            HttpSession session=request.getSession();
+            Long userID = (Long) session.getAttribute("id");
 
-            if (actualUser.getUserId() == testuserID) {
+            actualUser = controller.getUserById(userID);
+
+            if (actualUser.getUserId() == userID) {
                 request.setAttribute("actualUser", actualUser);
                 request.getRequestDispatcher("changeprofile.jsp").forward(request, response);
             } else {
@@ -54,6 +59,10 @@ public class ChangeProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
 
+            HttpSession session=request.getSession();
+            Long userID = (Long) session.getAttribute("id");
+
+            actualUser = controller.getUserById(userID);
 
             String password = request.getParameter("password");
             String profilepic = request.getParameter("profilepic");
