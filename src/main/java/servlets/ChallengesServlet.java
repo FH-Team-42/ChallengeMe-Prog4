@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 @WebServlet(
         name = "ChallengeServlet",
@@ -31,25 +32,17 @@ public class ChallengesServlet extends HttpServlet {
 
         switch(request.getParameter("action")) {
             case "showAll":
-                ArrayList<Challenge> challenges = controller.getAllChallenges();
-                if(!challenges.isEmpty()) {
-                    request.setAttribute("challengeList", challenges);
-                    request.getRequestDispatcher("challenges.jsp").forward(request, response);
-                } else {
-                    response.getWriter().print("No challenges in Database");
-                }
+                showAllChallenges(request, response);
                 break;
             case "show":
-                long challengeId = Long.parseLong(request.getParameter("challengeId"));
-                Challenge desiredChallenge = controller.getChallengeById(challengeId);
-                if(desiredChallenge != null) {
-                    String creatorUsername = controller.getUserById(desiredChallenge.getIdCreator()).getName();
-                    request.setAttribute("creatorUsername", creatorUsername);
-                    request.setAttribute("desiredChallenge", desiredChallenge);
-                    request.getRequestDispatcher("single-challenge.jsp").forward(request, response);
-                } else {
-                    response.getWriter().print("There was an error with your Challenge");
-                }
+                showChallenge(request, response);
+                break;
+            case "start":
+                startChallenge(request, response);
+                break;
+            case "showActive":
+                showActiveChallenges(request, response);
+                break;
 
 
         }
@@ -58,20 +51,65 @@ public class ChallengesServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String message = "";
+
         switch(request.getParameter("action")) {
             case "create":
-                message = createChallenge(request, response);
+                createChallenge(request, response);
                 break;
         }
+    }
 
-        HttpSession session = request.getSession();
-        session.setAttribute("message", message);
-        response.sendRedirect("index.jsp");
+    private void showAllChallenges(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        ArrayList<Challenge> challenges = controller.getAllChallenges();
+        if(!challenges.isEmpty()) {
+            request.setAttribute("challengeList", challenges);
+            request.getRequestDispatcher("challenges.jsp").forward(request, response);
+        } else {
+            response.getWriter().print("No challenges in Database");
+        }
+    }
+
+    private void showChallenge(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        long challengeId = Long.parseLong(request.getParameter("challengeId"));
+        Challenge desiredChallenge = controller.getChallengeById(challengeId);
+        if(desiredChallenge != null) {
+            String creatorUsername = controller.getUserById(desiredChallenge.getIdCreator()).getName();
+            request.setAttribute("creatorUsername", creatorUsername);
+            request.setAttribute("desiredChallenge", desiredChallenge);
+            request.getRequestDispatcher("single-challenge.jsp").forward(request, response);
+        } else {
+            response.getWriter().print("There was an error with your Challenge");
+        }
+    }
+
+    private void startChallenge(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        long idChallengedUser = (int) request.getSession(false).getAttribute("userId");
+        long challengeId = Long.parseLong(request.getParameter("challengeId"));
+        Challenge startedChallenge = controller.getChallengeById(challengeId);
+        startedChallenge.setIdChallenged(idChallengedUser);
+        startedChallenge.setStarted(new Date());
+        controller.updateChallenge(startedChallenge);
+
+
+        ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(idChallengedUser);
+        request.setAttribute("activeChallenges", activeChallenges);
+        request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
+    }
+
+    private void showActiveChallenges(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        long sessionUserId = (int) request.getSession(false).getAttribute("userId");
+        ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
+        request.setAttribute("activeChallenges", activeChallenges);
+        request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
     }
 
 
-    private String createChallenge(HttpServletRequest request, HttpServletResponse response) {
+    private void createChallenge(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         String title = request.getParameter("title");
         String description = request.getParameter("description");
@@ -81,6 +119,8 @@ public class ChallengesServlet extends HttpServlet {
 
         controller.createChallenge(new Challenge(title, description, completionTime, idCreator));
 
-        return "Challenge wurde hinzugefügt!";
+        HttpSession session = request.getSession(false);
+        session.setAttribute("message", "Challenge wurde erfolgreich hinzugefügt.");
+        response.sendRedirect("index.jsp");
     }
 }

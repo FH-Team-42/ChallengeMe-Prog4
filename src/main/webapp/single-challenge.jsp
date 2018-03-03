@@ -25,7 +25,7 @@
 <h4>Ersteller:</h4>
 <p>${creatorUsername}</p> <br> <br>
 
-<button><a href="challenges?action=start&userId=<%out.print(request.getSession().getAttribute("userId"));%>&challengeId=<%out.print(challenge.getChallengeId());%>">Starten</a></button>
+<button><a href="challenges?action=start&challengeId=<%out.print(desiredChallenge.getChallengeId());%>">Starten</a></button>
 <button><a href="challenges?action=showAll">Zurück</a></button>
 
 <%@include file="includes/footer.jsp"%>

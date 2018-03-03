@@ -59,4 +59,15 @@ public class StorageController {
         userDao.create(user);
     }
 
+    public ArrayList<Challenge> getActiveChallengesByUserId(long idChallenged) {
+        ArrayList<Challenge> allChallenges = new ArrayList<Challenge>(challengeDao.findAll());
+        ArrayList<Challenge> activeChallenges = new ArrayList<Challenge>();
+        for (Challenge c : allChallenges) {
+            if (c.getIdChallenged() == idChallenged) {
+                activeChallenges.add(c);
+            }
+        }
+        return activeChallenges;
+    }
+
 }

@@ -124,7 +124,7 @@ public class Challenge extends AbstractChallengeEntity {
      *
      * @return Start time in Date-Format
      */
-    public Date getStartedAt() {
+    public Date getStarted() {
         return startedAt;
     }
 
@@ -182,7 +182,7 @@ public class Challenge extends AbstractChallengeEntity {
      *
      * @param setStartedAt The Date the challenge was started
      */
-    public void setStartedAt(Date setStartedAt) {
+    public void setStarted(Date setStartedAt) {
         startedAt = setStartedAt;
     }
 
