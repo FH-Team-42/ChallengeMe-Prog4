@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import administration.StorageController;
 import models.User;
+import utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,60 +25,38 @@ import java.text.*;
 )
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
 
-            HttpSession session=request.getSession();
-            StorageController controller = new StorageController();
-
-
-            //getData from register form
-            String name = request.getParameter("username");
-            String password = request.getParameter("password");
-            String birthdayString = request.getParameter("birthday");
-            //Date date = new Date(2000, 1, 1);
+        HttpSession session=request.getSession();
+        StorageController controller = new StorageController();
 
 
-            //TODO geburtstag eintragen
-            SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = in.parse(birthdayString);
+        //getData from register form
+        String name = request.getParameter("username");
+        String password = request.getParameter("password");
+        String birthdayString = request.getParameter("birthday");
+
+        Date date = Utils.parseDate(birthdayString);
 
 
-            //create new User
-            User actualUser = new User(name, password, date);
-            controller.createUser(actualUser);
+        //create new User
+        User newUser = new User(name, password, date);
+        controller.createUser(newUser);
 
 
-            ArrayList<User> userlist;
-            userlist = controller.getAllUsers();
-            for (User u: userlist) {
-                if(u.getName().equals(name))
-                {
+        ArrayList<User> userList;
+        userList = controller.getAllUsers();
+        for (User u: userList) {
+            if(u.getName().equals(name))
+            {
 
-                        actualUser = u;
+                    newUser = u;
 
-                        session.setAttribute("id",actualUser.getUserId());
-                }
+                    session.setAttribute("id",newUser.getUserId());
             }
-
-
-            response.sendRedirect("profile");
-
-
-
-        } catch (Exception e) {
-            throw new ServletException(e);
         }
 
 
-    }
+        response.sendRedirect("profile");
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
     }
 }

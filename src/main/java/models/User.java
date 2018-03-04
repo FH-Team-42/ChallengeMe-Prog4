@@ -9,6 +9,10 @@ import java.util.Date;
  * Created by Felix on 02.01.2017.
  */
 
+/**
+ * This class is representing the model for a user. It creates a database entity which is realized in the H2 database.
+ * A user has an username, a password, a birthday and a profile picture.
+ */
 @Entity
 public class User extends AbstractUserEntity {
 
@@ -21,27 +25,16 @@ public class User extends AbstractUserEntity {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    public String getProfilePic() {
-        return profilePic;
-    }
-
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
-    }
-
     @Column
     private String profilePic;          //link to profile pic
-
-
-    @Column
-    private int challengesCompleted;    //count of the challenges the user hat completed
-
-    @Column
-    private int challengeCurrent;      //ID of the assigned challenge
 
     @Column
     private int reputation;
 
+    /**
+     * Standard constructor for User
+     *
+     */
     public User(){
 
     }
@@ -60,14 +53,7 @@ public class User extends AbstractUserEntity {
         password = pass;
         birthday = day;
         profilePic = "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
-        challengesCompleted = 0;
-        challengeCurrent = 0;
         reputation = 100;
-    }
-
-
-    public void completeChallenge() {
-        challengesCompleted++;
     }
 
 
@@ -76,16 +62,15 @@ public class User extends AbstractUserEntity {
      *
      * @return If giving up was successful
      */
-    public int giveUp() {
+    /*public int giveUp() {
         if (challengeCurrent != 0) {
-            //challengeAddToDatabase(user.challengeAssigned);     //will be added to control unit
             challengeCurrent = 0;
             return 1;
         } else {
             reputation -= 2;
             return 0;
         }
-    }
+    }*/
 
     /**
      * Returns the username
@@ -114,23 +99,15 @@ public class User extends AbstractUserEntity {
         return birthday;
     }
 
-    /**
-     * Returns the users ID
-     *
-     * @return The users ID
-     */
-    //public int getUserID() {
-    //    return userID;
-    //}
 
     /**
      * Returns the users reputation
      *
      * @return The users reputation
      */
-    public int getReputation() {
+    /*public int getReputation() {
         return reputation;
-    }
+    }*/
 
     /**
      * Sets the users Name
@@ -139,7 +116,6 @@ public class User extends AbstractUserEntity {
      */
     public void setName(String name) {
         username = name;
-    //    String query = "UPDATE users SET username='" + name +  "' WHERE userID=" + userID;
     }
 
     /**
@@ -147,31 +123,30 @@ public class User extends AbstractUserEntity {
      *
      * @param pass The password
      */
-    public void setPass(String pass) {
+    public void setPassword(String pass) {
         password = pass;
-        //String query = "UPDATE users SET password='" + pass +  "' WHERE userID=" + userID;
     }
-
 
     /**
-     * Sets the users birth year
+     * Return the profile picture URL
      *
-     * @param birthday The users birth year
+     * @return profilePicture URL
      */
-    public void setYear(Date birthday) {
-        this.birthday = birthday;
-
+    public String getProfilePic() {
+        return profilePic;
     }
 
-    public int getChallengesCompleted() {
-        return challengesCompleted;
+    /**
+     * Sets a new profile picture URL
+     *
+     * @param profilePic new profile picture URL
+     */
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
-    public void setChallengesCompleted(int challengesCompleted) {
-        this.challengesCompleted = challengesCompleted;
-    }
 
-    public void voteForUser(int vote){
+    /*public void voteForUser(int vote){
         reputation += vote;
-    }
+    }*/
 }

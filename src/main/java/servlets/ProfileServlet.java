@@ -26,25 +26,24 @@ public class ProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            StorageController controller = new StorageController();
+
+        StorageController controller = new StorageController();
 
 
-            //Gets Sessions and load actual user ID
-            HttpSession session=request.getSession();
-            Long userID = (Long) session.getAttribute("id");
+        //Gets Sessions and load actual user ID
+        HttpSession session = request.getSession(false);
+        Long userID = (Long) session.getAttribute("id");
 
 
-            User actualUser = controller.getUserById(userID);
-            if(actualUser.getUserId()==userID) {
-                request.setAttribute("actualUser", actualUser);
-                request.getRequestDispatcher("profile.jsp").forward(request, response);
-            } else {
-                response.getWriter().print("Actual User not found");
-            }
-        } catch (Exception e) {
-            throw new ServletException(e);
+        User actualUser = controller.getUserById(userID);
+        int completedChallenges = controller.getCompletedChallengesByUserId(userID);
+
+        if(actualUser.getUserId() == userID) {
+            request.setAttribute("completedChallenges", completedChallenges);
+            request.setAttribute("actualUser", actualUser);
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
+        } else {
+            response.getWriter().print("Actual User not found");
         }
-
     }
 }

@@ -31,7 +31,7 @@ public class StorageController {
     }
 
     public ArrayList<Challenge> getAllChallenges() {
-        return new ArrayList<Challenge>( challengeDao.findAll());
+        return new ArrayList<>( challengeDao.findAll());
     }
 
     public void createAllUsers(Collection<User> users) {
@@ -43,7 +43,7 @@ public class StorageController {
     }
 
     public ArrayList<User> getAllUsers() {
-        return new ArrayList<User>( userDao.findAll());
+        return new ArrayList<>( userDao.findAll());
     }
 
     public Challenge getChallengeById(long id) {
@@ -60,8 +60,8 @@ public class StorageController {
     }
 
     public ArrayList<Challenge> getActiveChallengesByUserId(long idChallenged) {
-        ArrayList<Challenge> allChallenges = new ArrayList<Challenge>(challengeDao.findAll());
-        ArrayList<Challenge> activeChallenges = new ArrayList<Challenge>();
+        ArrayList<Challenge> allChallenges = new ArrayList<>(challengeDao.findAll());
+        ArrayList<Challenge> activeChallenges = new ArrayList<>();
         for (Challenge c : allChallenges) {
             if (c.getIdChallenged() == idChallenged) {
                 activeChallenges.add(c);
@@ -90,5 +90,15 @@ public class StorageController {
         userDao.create(user);
     }
 
+    public int getCompletedChallengesByUserId(long id) {
+        ArrayList<CompletedChallenge> allCompleted = new ArrayList<>(completedDao.findAll());
+        int counter = 0;
+        for (CompletedChallenge comp : allCompleted) {
+            if(comp.getUserId() == id) {
+                counter++;
+            }
+        }
+        return counter;
+    }
 
 }

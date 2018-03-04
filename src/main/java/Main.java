@@ -20,7 +20,7 @@ public class Main {
         controller.createAllUsers(users);
 
 
-        Collection<Challenge> challenges = provider.createTestChallenges(controller.getUserById(new Long(1)).getUserId(), controller.getUserById(new Long(2)).getUserId(), controller.getUserById(new Long(3)).getUserId());
+        Collection<Challenge> challenges = provider.createTestChallenges(controller.getUserById(1L).getUserId(), controller.getUserById(2L).getUserId(), controller.getUserById(3L).getUserId());
         controller.createAllChallenges(challenges);
 
         ArrayList<Challenge> challenge = controller.getAllChallenges();

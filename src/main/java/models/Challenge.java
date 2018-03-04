@@ -43,6 +43,7 @@ public class Challenge extends AbstractChallengeEntity {
     public Challenge() {
 
     }
+
     /**
      * Creates a new challenge and inserts it into the database if it is not part of it yet.
      *
@@ -61,6 +62,11 @@ public class Challenge extends AbstractChallengeEntity {
         isCompleted = false;
     }
 
+    /**
+     * completes the challenge through removing the challengerId
+     * and setting isCompleted true
+     *
+     */
     public void complete() {
         isCompleted = true;
         idChallenged = 0L;
@@ -109,10 +115,10 @@ public class Challenge extends AbstractChallengeEntity {
      *
      * @return The current voting of the challenge
      */
-    public int getVote() {
+    /*public int getVote() {
         return vote;
 
-    }
+    }*/
 
     /**
      * Get remaining completion time
@@ -198,8 +204,8 @@ public class Challenge extends AbstractChallengeEntity {
      *
      * @param value The value to add (1 for positive, -1 for negative vote)
      */
-    public void userVote(int value) {
+    /*public void userVote(int value) {
     	vote += value;
-    }
+    }*/
 
 }

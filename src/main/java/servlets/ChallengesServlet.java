@@ -3,14 +3,12 @@ package servlets;
 import administration.StorageController;
 import models.Challenge;
 import models.CompletedChallenge;
-import models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +21,9 @@ public class ChallengesServlet extends HttpServlet {
 
     private StorageController controller;
 
-    public ChallengesServlet() {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         controller = new StorageController();
     }
 
@@ -46,6 +46,7 @@ public class ChallengesServlet extends HttpServlet {
                     break;
                 case "complete":
                     completeChallenge(request, response);
+                    break;
             }
 
         } else {
@@ -102,7 +103,7 @@ public class ChallengesServlet extends HttpServlet {
         Challenge startedChallenge = controller.getChallengeById(challengeId);
         if(startedChallenge.isCompleted()) {
             message = "Challenge wurde bereits abgeschlossen. Wähle eine andere";
-            request.getSession(false).setAttribute("message", message);
+            request.setAttribute("message", message);
             showChallenge(request, response);
         } else {
             startedChallenge.setIdChallenged(sessionUserId);
@@ -131,9 +132,6 @@ public class ChallengesServlet extends HttpServlet {
         long sessionUserId = (long) request.getSession(false).getAttribute("id");
 
         if(completedChallenge.getIdChallenged() == sessionUserId) {
-            User user = controller.getUserById(sessionUserId);
-            user.completeChallenge();
-            controller.updateUser(user);
             completedChallenge.complete();
             controller.updateChallenge(completedChallenge);
             CompletedChallenge challenge = new CompletedChallenge(sessionUserId, completedChallenge.getChallengeId());
@@ -158,8 +156,7 @@ public class ChallengesServlet extends HttpServlet {
 
         controller.createChallenge(new Challenge(title, description, completionTime, idCreator));
 
-        HttpSession session = request.getSession(false);
-        session.setAttribute("message", "Challenge wurde erfolgreich hinzugefügt.");
-        response.sendRedirect("create-challenge.jsp");
+        request.getSession(false).setAttribute("message", "Challenge wurde erfolgreich hinzugefügt.");
+        response.sendRedirect("challenges?action=showAll");
     }
 }

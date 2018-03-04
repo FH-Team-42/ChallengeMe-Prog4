@@ -65,9 +65,9 @@ Design: https://www.w3schools.com/howto/howto_css_profile_card.asp
     <img src="<% out.print(actualUser.getProfilePic()); %>" alt="Profilbild" style="width:100%">
     <h1><% out.print(actualUser.getName()); %></h1>
     <p class="title "> Geburtsdatum: <% out.print(actualUser.getBirthday()); %></p>
-    <p class="title">Geschaffte Challenges: <% out.print(actualUser.getChallengesCompleted()); %></p>
+    <p class="title">Geschaffte Challenges: ${completedChallenges}</p>
 
-    <p><button onclick="location.href='changeprofile'">Ändern</button></p>
+    <p><button onclick="location.href='change-profile'">Ändern</button></p>
 </div>
 
 

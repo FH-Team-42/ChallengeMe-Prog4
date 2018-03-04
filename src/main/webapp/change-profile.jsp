@@ -16,7 +16,7 @@
 
 
 
-<form class="pure-form" action="/changeprofile" method="post">
+<form class="pure-form" action="change-profile" method="post">
     <fieldset>
         <legend>Passwort ändern</legend>
         <input type="password" placeholder="Passwort" id="password" name="password" required>
@@ -43,10 +43,10 @@
     </fieldset>
 </form>
 
-<form class="pure-form" action="/changeprofile" method="post">
+<form class="pure-form" action="change-profile" method="post">
     <fieldset>
         <legend>Profilbild ändern</legend>
-        <input type="text" placeholder="neuer Profilbildlink" id="profilepic" name="profilepic" required>
+        <input type="text" placeholder="neuer Profilbildlink" id="profilePicture" name="profilePicture" required>
 
         <button type="submit" class="pure-button pure-button-primary">Confirm</button>
 

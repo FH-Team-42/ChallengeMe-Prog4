@@ -52,19 +52,19 @@
 
 
 <div class="card">
-    <form class="pure-form" action="/login" method="post">
+    <form class="pure-form" action="login" method="post">
         <input type="text" placeholder="Name" id="username" name="username" required>
         <input type="password" placeholder="Passwort" id="password" name="password" required>
 
         <button type="submit" class="pure-button pure-button-primary">Anmelden</button>
-        <button onclick="location.href='register'">Registrieren</button>
+        <button onclick="location.href='register.jsp'">Registrieren</button>
     </form>
 
 </div>
 
 
 <br>
-<h1>${sessionScope.message}</h1>
+<h1>${message}</h1>
 
 
 </body>

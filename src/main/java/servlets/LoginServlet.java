@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
@@ -24,19 +25,19 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 
     private StorageController controller;
-    User actualUser;
-    ArrayList<User> userlist;
 
 
-    public LoginServlet()
-    {
+    @Override
+    public void init() throws ServletException {
+        super.init();
         controller = new StorageController();
-        userlist = controller.getAllUsers();
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        ArrayList<User> userList = controller.getAllUsers();
 
         String password = request.getParameter("password");
         String username = request.getParameter("username");
@@ -46,40 +47,39 @@ public class LoginServlet extends HttpServlet {
 
         //Check if login name and password fits with one of the user list
         //if it is fitting, get session with user, if not alert failure
-        for (User u: userlist) {
-
-            //response.getWriter().print(u.getName());
-            //response.getWriter().print(u.getPass());
+        for (User u: userList) {
 
             if(u.getName().equals(username))
             {
                if(u.getPass().equals(password))
                {
-                   actualUser = u;
-
-                   // TODO User in Session eintragen
-                   HttpSession session=request.getSession();
-                   session.setAttribute("id",actualUser.getUserId());
+                   HttpSession session = request.getSession();
+                   session.setAttribute("id", u.getUserId());
                    response.sendRedirect("profile");
-
 
                }
                else
                {
-                   response.getWriter().print("Falsches Passwort");
+                   response.getWriter().print("Falsches Passwort: " + password + ", " + u.getPass());
                }
+                break;
+            } else {
+                response.getWriter().print("User nicht vorhanden");
             }
+            break;
         }
 
-        response.getWriter().print("User nicht vorhanden");
+
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
             switch(request.getParameter("action")) {
                 case "logout":
                     request.getSession(false).removeAttribute("id");
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("/");
         }
     }
 }
