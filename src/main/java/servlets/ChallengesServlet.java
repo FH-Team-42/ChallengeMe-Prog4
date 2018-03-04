@@ -1,5 +1,11 @@
 package servlets;
 
+
+/**
+ * This servlet handels everything in the frontend, what has to do with the challenges.
+ * It is possible to start and end the challenges and also show them on a table.
+ */
+
 import administration.StorageController;
 import models.Challenge;
 import models.CompletedChallenge;

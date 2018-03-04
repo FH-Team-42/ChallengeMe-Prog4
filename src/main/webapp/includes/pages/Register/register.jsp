@@ -22,6 +22,8 @@
 
 
         <button type="submit" class="pure-button pure-button-primary">Registrieren</button>
+        <button onclick="location.href='/'">Zurück</button>
+
 
 
 

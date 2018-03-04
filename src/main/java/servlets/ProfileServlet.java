@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
  * Created by davidwenkemann on 02.03.18.
  */
 
+
+/**
+ * This servlet get the id out of the session and load all information from the database.
+ */
+
 @WebServlet(
         name = "ProfileServlet",
         urlPatterns = "/profile"
