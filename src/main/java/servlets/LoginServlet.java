@@ -73,7 +73,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         if(success) {
-            response.sendRedirect("profile");
+            response.sendRedirect("/challenges?action=showActive");
         } else {
             request.getSession(false).setAttribute("message", "Username oder Passwort falsch!");
             response.sendRedirect("/");
