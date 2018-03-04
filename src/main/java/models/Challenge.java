@@ -2,15 +2,15 @@ package models;
 
 import javax.persistence.*;
 
-import administration.daos.AbstractDatabaseEntity;
-//import administration.timerListener;
+import administration.daos.AbstractChallengeEntity;
+import jdk.jfr.Timestamp;
 
-import javax.swing.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
+
 @Entity
-public class Challenge extends AbstractDatabaseEntity{
+public class Challenge extends AbstractChallengeEntity {
+
 
     @Column
     private String title;       //title of the challenge
@@ -22,14 +22,10 @@ public class Challenge extends AbstractDatabaseEntity{
     private int completionTime; //time to complete challenge
 
     @Column
-    private int idCreator;      //ID of challenge creator in database
-
-    //@Id
-    //@GeneratedValue (strategy = GenerationType.IDENTITY)
-    //private int idChallenge;    //ID of challenge in database
+    private Long idCreator;      //ID of challenge creator in database
 
     @Column
-    private int idChallenged;   //ID of the user which is assigned this challenge
+    private Long idChallenged;   //ID of the user which is assigned this challenge
 
     @Column
     private int vote;           //votes of the challenge, delete challenges with too much negative votes
@@ -37,13 +33,8 @@ public class Challenge extends AbstractDatabaseEntity{
     @Column
     private boolean isCompleted;
 
-    @Column
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date createdAt;
-
-    @Column
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startedAt;
 
 
     //connectDataBase database = new connectDataBase(); //connection to the database
@@ -52,6 +43,7 @@ public class Challenge extends AbstractDatabaseEntity{
     public Challenge() {
 
     }
+
     /**
      * Creates a new challenge and inserts it into the database if it is not part of it yet.
      *
@@ -60,40 +52,25 @@ public class Challenge extends AbstractDatabaseEntity{
      * @param completionTime The time to complete the challenge in seconds
      * @param idCreator      User-ID of user creating the challenge
      */
-    public Challenge(String title, String description, int completionTime, int idCreator) {
+    public Challenge(String title, String description, int completionTime, long idCreator) {
         this.title = title;
         this.description = description;
         this.completionTime = completionTime;
         this.idCreator = idCreator;
-        idChallenged = 0;
+        idChallenged = 0L;
         vote = 0;
-       /* if (!database.dataBaseQueryString("SELECT * FROM challenges WHERE title='" + this.title + "'", "title").equals(this.title)) {
-            idChallenge = getNewChallengeID();
-            String insertString = "INSERT INTO challenges (ChallengeID, challenged, creator, title, description, completionTime, votes) VALUES("
-                    + idChallenge + ", " + idChallenged + ", " + idCreator + ", '" + title + "', '" + description + "', " + completionTime + ", " + vote + ")";
-            database.insertQuery(insertString);
-        }else{
-            idChallenge = database.dataBaseQueryInt("SELECT * FROM challenges WHERE title='" + this.title + "'", "ChallengeID");
-        }*/
+        isCompleted = false;
     }
 
     /**
-     * Starts the countdown for the challenge
-     */
-    public void startChallenge() {
-        /* timerListener listener = new timerListener(completionTime);
-        Timer timer = new Timer(1000, listener);
-        timer.start(); */
-    }
-
-    /**
-     * Gets the next free ID from the challenge database
+     * completes the challenge through removing the challengerId
+     * and setting isCompleted true
      *
-     * @return Free challenge ID
      */
-    //public int getNewChallengeID() {
-    //    return idChallenge;
-    //}
+    public void complete() {
+        isCompleted = true;
+        idChallenged = 0L;
+    }
 
     /**
      * Get the title of the challenge
@@ -102,7 +79,6 @@ public class Challenge extends AbstractDatabaseEntity{
      */
     public String getTitle() {
     	return title;
-
     }
 
     /**
@@ -119,26 +95,17 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The challenge creator's ID
      */
-    public int getCreatorId() {
+    public Long getIdCreator() {
     	return idCreator;
 
     }
-
-    /**
-     * Get the challenge's ID
-     *
-     * @return The challenge's ID
-     */
-    //public int getChallengeId() {
-    //	return idChallenge;
-    //}
 
     /**
      * Get the challenged person's user ID
      *
      * @return The challenged person's user ID
      */
-    public int getChallengedId() {
+    public Long getIdChallenged() {
     	return idChallenged;
 
     }
@@ -148,10 +115,10 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @return The current voting of the challenge
      */
-    public int getVote() {
+    /*public int getVote() {
         return vote;
 
-    }
+    }*/
 
     /**
      * Get remaining completion time
@@ -160,6 +127,25 @@ public class Challenge extends AbstractDatabaseEntity{
      */
     public int getCompletionTime() {
         return completionTime;
+    }
+
+
+    /**
+     * Get the start time of the challenge
+     *
+     * @return Start time in Date-Format
+     */
+    public Date getStarted() {
+        return startedAt;
+    }
+
+    /**
+     * Returns if the challenge is already completed.
+     *
+     * @return Value of isCompleted
+     */
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     /**
@@ -195,18 +181,22 @@ public class Challenge extends AbstractDatabaseEntity{
     /**
      * Set the challenged user's ID
      *
-     * @param setChallengedId The challenged user's ID
+     * @param setIdChallenged The challenged user's ID
      */
-    public void setChallengedId(int setChallengedId) {
-        idChallenged = setChallengedId;
+    public void setIdChallenged(Long setIdChallenged) {
+        idChallenged = setIdChallenged;
 
     }
 
-    @PrePersist
-    void onCreate() { this.setCreated( new Date() ); }
+    /**
+     * Set the challenges start date
+     *
+     * @param setStartedAt The Date the challenge was started
+     */
+    public void setStarted(Date setStartedAt) {
+        startedAt = setStartedAt;
+    }
 
-    @PreUpdate
-    void onUpdate() { this.setUpdated( new Date() ); }
 
     /**
      * Vote the challenge
@@ -214,8 +204,8 @@ public class Challenge extends AbstractDatabaseEntity{
      *
      * @param value The value to add (1 for positive, -1 for negative vote)
      */
-    public void userVote(int value) {
+    /*public void userVote(int value) {
     	vote += value;
-    }
+    }*/
 
 }

@@ -3,4 +3,9 @@
 
 \.gradle/
 
-out/
+\.out/
+
+\.build/
+tomcat/
+
+build/

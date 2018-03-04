@@ -9,12 +9,12 @@ import java.util.Date;
 
 
 @Entity
-@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
-public abstract class AbstractDatabaseEntity
+@Inheritance( strategy = InheritanceType.JOINED )
+public abstract class AbstractChallengeEntity
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    protected Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long challengeId;
 
     @Version
     protected Long version;
@@ -25,7 +25,7 @@ public abstract class AbstractDatabaseEntity
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updated;
 
-    protected AbstractDatabaseEntity() {}
+    protected AbstractChallengeEntity() {}
 
     public Date getCreated()
     {
@@ -37,17 +37,17 @@ public abstract class AbstractDatabaseEntity
         this.created = created;
     }
 
-    public Long getId()
+    public long getChallengeId()
     {
-        return id;
+        return challengeId;
     }
 
-    public void setId(Long id)
+    public void setChallengeId(Long challengeId)
     {
-        this.id = id;
+        this.challengeId = challengeId;
     }
 
-    public Date getModified()
+    public Date getUpdated()
     {
         return updated;
     }
@@ -88,8 +88,8 @@ public abstract class AbstractDatabaseEntity
 
     @Override
     public String toString() {
-        return "AbstractDatabaseEntity{" +
-                "id=" + id +
+        return "AbstractChallengeEntity{" +
+                "id=" + challengeId +
                 ", created=" + created +
                 ", version=" + version +
                 ", updated=" + updated +
