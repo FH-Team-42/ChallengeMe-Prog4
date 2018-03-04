@@ -144,7 +144,11 @@ public class ChallengesServlet extends HttpServlet {
         long challengeId = Long.parseLong(request.getParameter("challengeId"));
         Challenge startedChallenge = controller.getChallengeById(challengeId);
         if(startedChallenge.isCompleted()) {
-            message = "Challenge wurde bereits abgeschlossen. Wähle eine andere";
+            message = "Challenge wurde bereits abgeschlossen. Wähle eine andere!";
+            request.getSession(false).setAttribute("message", message);
+            showChallenge(request, response);
+        } else if(startedChallenge.getStarted() != null) {
+            message = "Challenge wurde bereits von jemandem gestartet. Wähle eine andere!";
             request.getSession(false).setAttribute("message", message);
             showChallenge(request, response);
         } else {
