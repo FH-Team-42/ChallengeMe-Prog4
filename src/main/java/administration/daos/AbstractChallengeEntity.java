@@ -4,7 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by Max on 28.05.2017.
+ * Created by Max.
+ *
+ * This class is the abstract entry for a challenge in the database. It includes the id, the version, the creation
+ * date and the update date of a challenge.
  */
 
 

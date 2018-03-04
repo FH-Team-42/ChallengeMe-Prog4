@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * Created by Max on 02.01.2017.
+ * Created by Max.
+ *
+ * This class provides utility functions for any case.
  */
 public class Utils {
 

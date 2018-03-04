@@ -7,10 +7,9 @@ import models.User;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/*
+/**
     This class is used to create Dao instances and to hide all
-    the database related stuff. Therefore, it can be considered
-    as a Facade to the database module/package.
+    the database related stuff.
 
     It is implemented as a singleton and holds a reference to the
     sole instance of our EntityManagerFactory that manages our
@@ -44,10 +43,6 @@ public class DataController
     {
         this.entityManagerFactory = Persistence.createEntityManagerFactory( PERSISTENCE_UNIT_NAME );
     }
-
-    /*
-        Dao Getter
-     */
 
     /**
      * Gets a Dao containing a challenges data

@@ -4,7 +4,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by Max on 28.05.2017.
+ * Created by Max.
+ *
+ * This class represents the abstract database entry for a user. It contains an id, a version,
+ * a creation date, an update date and the last login date of the user.
+ *
  */
 
 

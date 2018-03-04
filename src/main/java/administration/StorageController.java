@@ -12,7 +12,12 @@ import java.util.Collection;
 
 
 /**
- * Created by Max on 09.07.2017.
+ * Created by Max.
+ *
+ * The StorageController class is creating all the Daos, retrieving them from the DataController.
+ * The StorageController is the contact point for all database-related actions from the rest of the program.
+ * Whenever something needs to be inserted, deleted or updated in the database
+ * the methods of this class are called.
  */
 public class StorageController {
 
@@ -178,6 +183,7 @@ public class StorageController {
             }
         }
         return counter;
+
     }
 
 }

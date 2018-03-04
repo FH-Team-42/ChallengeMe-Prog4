@@ -5,16 +5,16 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by Max on 28.05.2017.
- */
-    /*
-        Common Interface for all of our Dao classes
+ * Created by Max.
+ *
+ *
+    Combined Interface for all of our Dao classes
 
-        Completely hides all the JPA/Database related stuff.
+    Completely hides all the JPA/Database related stuff.
 
-        Always use this interface as the reference type wherever you
-        need to use the Dao!
-     */
+    Always use this interface as the reference type wherever you
+    need to use the Dao!
+*/
 public interface IGenericDao<T>
 {
     T findById( Long id );

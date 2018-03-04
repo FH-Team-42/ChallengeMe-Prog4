@@ -1,6 +1,7 @@
 package administration;
 
 import models.Challenge;
+import models.CompletedChallenge;
 import models.User;
 
 import java.util.ArrayList;
@@ -15,11 +16,27 @@ public interface IStorageController {
 
     ArrayList<Challenge> getAllChallenges();
 
+    void updateChallenge(Challenge challenge);
+
+    void createChallenge (Challenge challenge);
+
+    Challenge findChallengeById(Long id);
+
+    ArrayList<Challenge> getActiveChallengesByUserId(long idChallenged);
+
+    void deleteChallenge(Challenge challenge);
+
+    void deleteChallengeById(long id);
+
+    void createCompletedChallenge(CompletedChallenge completed);
+
+    int getCompletedChallengesByUserId(long id);
+
     void createAllUsers(Collection<User> users);
 
     ArrayList<User> getAllUsers();
 
-    Challenge findChallengeById(Long id);
 
-    void updateChallenge(Challenge challenge);
+
+
 }

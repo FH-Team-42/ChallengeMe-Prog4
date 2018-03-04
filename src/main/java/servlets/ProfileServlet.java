@@ -35,13 +35,13 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if(request.getSession(false).getAttribute("id") != null) {
+        if(request.getSession().getAttribute("id") != null) {
 
             StorageController controller = new StorageController();
 
 
             //Gets Sessions and load actual user ID
-            HttpSession session = request.getSession(false);
+            HttpSession session = request.getSession();
             Long userID = (Long) session.getAttribute("id");
 
 

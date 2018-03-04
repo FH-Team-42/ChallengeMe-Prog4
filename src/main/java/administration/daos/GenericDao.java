@@ -1,10 +1,5 @@
 package administration.daos;
 
-/**
- * Created by Max on 28.05.2017.
- */
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.Collection;
@@ -12,14 +7,16 @@ import java.util.List;
 
 
 
-/*
-    Our generic Dao for all model objects
+/**
+ * Created by Max.
+ *
+    The generic Dao for all model objects
 
     It has package-local visibility - thus, instances can only be created inside
     this package. Using this approach, we can prevent any class from the outside of
     this package to create Dao instances.
 
-    Anyone, who needs a Dao must therefore use our DataController class.
+    Anyone, who needs a Dao must therefore use the DataController class.
 
  */
 class GenericDao<T> implements IGenericDao<T>

@@ -6,6 +6,11 @@ import utilities.Utils;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * The DataProvider provides sample data for user and challenges to the other classes.
+ * It creates 3 test user and 3 test challenges, if the respective methods are called.
+ *
+ */
 public class DataProvider {
 
     private User user1 = null;
