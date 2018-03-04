@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * This class is representing the model for a user. It creates a database entity which is realized in the H2 database.
- * A user has an username, a password, a birthday and a profile picture.
+ * A user has a username, a password, a birthday and a profile picture.
  */
 @Entity
 public class User extends AbstractUserEntity {
@@ -82,7 +82,7 @@ public class User extends AbstractUserEntity {
     }
 
     /**
-     * Returns the user password
+     * Returns the users password
      *
      * @return The users password
      */

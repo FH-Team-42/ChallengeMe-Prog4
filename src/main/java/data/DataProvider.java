@@ -12,6 +12,10 @@ public class DataProvider {
     private User user2 = null;
     private User user3 = null;
 
+    /**
+     * Create new test users
+     * @return A collection of test users
+     */
     public Collection<User> createTestUsers() {
         //Collection<User> allUsers ;
 
@@ -29,6 +33,13 @@ public class DataProvider {
         return allUsers;
     }
 
+    /**
+     * Create three test challenges
+     * @param id1 The ID of the first challenge
+     * @param id2 The ID of the second challenge
+     * @param id3 The ID of the third challenge
+     * @return A collection of test users
+     */
     public Collection<Challenge> createTestChallenges(Long id1, Long id2, Long id3) {
         //Collection<Challenge> allChallenges = null;
 

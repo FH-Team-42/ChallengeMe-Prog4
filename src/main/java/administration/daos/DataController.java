@@ -27,6 +27,11 @@ public class DataController
      */
     private static DataController instance;
 
+    /**
+     * Returns the DataController instance in use
+     *
+     * @return The DataController instance
+     */
     public static DataController getInstance()
     {
         if( instance == null )
@@ -34,7 +39,6 @@ public class DataController
 
         return instance;
     }
-
 
     private DataController()
     {
@@ -45,18 +49,33 @@ public class DataController
         Dao Getter
      */
 
+    /**
+     * Gets a Dao containing a challenges data
+     *
+     * @return The challenge data dao
+     */
     public IGenericDao<Challenge> getChallengeDao()
     {
         return new GenericDao<Challenge>( Challenge.class,
                 this.entityManagerFactory.createEntityManager() );
     }
 
+    /**
+     * Gets a Dao containing a users data
+     *
+     * @return The user data dao
+     */
     public IGenericDao<User> getUserDao()
     {
         return new GenericDao<User>( User.class,
                 this.entityManagerFactory.createEntityManager() );
     }
 
+    /**
+     * Returns a dao containing a completed challenge
+     *
+     * @return The completed challenge dao
+     */
     public IGenericDao<CompletedChallenge> getCompletedDao() {
         return new GenericDao<CompletedChallenge>(CompletedChallenge.class,
                 this.entityManagerFactory.createEntityManager());

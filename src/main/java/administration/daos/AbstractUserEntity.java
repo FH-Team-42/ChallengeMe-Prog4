@@ -31,50 +31,100 @@ public abstract class AbstractUserEntity
 
     protected AbstractUserEntity() {}
 
+    /**
+     * Get the date the user was created
+     *
+     * @return The creation date
+     */
     public Date getCreated()
     {
         return created;
     }
 
+    /**
+     * Set the date the user was created
+     *
+     * @param created The creation date
+     */
     private void setCreated(Date created)
     {
         this.created = created;
     }
 
+    /**
+     * Get the users unique User-ID
+     *
+     * @return The User-ID
+     */
     public long getUserId()
     {
         return userId;
     }
 
+    /**
+     * Set the users unique User-ID
+     *
+     * @param userId The new User-ID
+     */
     public void setUserId(Long userId)
     {
         this.userId = userId;
     }
 
+    /**
+     * Get the date of the last update for the user
+     *
+     * @return The last update date
+     */
     public Date getUpdated()
     {
         return updated;
     }
 
+    /**
+     * Set the latest update date for the user
+     *
+     * @param updated The new update date
+     */
     public void setUpdated(Date updated)
     {
         this.updated = updated;
     }
 
+    /**
+     * Get the Version of the user
+     *
+     * @return The version
+     */
     public Long getVersion()
     {
         return version;
     }
 
+    /**
+     * Set the version of the user
+     *
+     * @param version The new version
+     */
     public void setVersion(Long version)
     {
         this.version = version;
     }
 
+    /**
+     * Get the date of the last login for the user
+     *
+     * @return The last login date
+     */
     public Date getLastLogin() {
         return lastLogin;
     }
 
+    /**
+     * Set the last login date for the user
+     *
+     * @param lastLogin The new last login date
+     */
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
     }

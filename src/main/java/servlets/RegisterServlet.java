@@ -24,6 +24,13 @@ import java.text.*;
         urlPatterns = "/register"
 )
 public class RegisterServlet extends HttpServlet {
+    /**
+     * Handles POST requests to the Register Servlet
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session=request.getSession();

@@ -34,6 +34,14 @@ public class LoginServlet extends HttpServlet {
 
     }
 
+    /**
+     * Handles GET requests to the login servlet
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -73,6 +81,14 @@ public class LoginServlet extends HttpServlet {
 
     }
 
+    /**
+     * Handles POST requests to the login servlet
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

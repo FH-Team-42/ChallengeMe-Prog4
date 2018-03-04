@@ -46,7 +46,7 @@ public class CompletedChallenge {
     /**
      * Returns the id inside the completed table
      *
-     * @return the id inside the completed table
+     * @return The id inside the completed table
      */
     public long getCompletedId() {
         return completedId;
@@ -55,7 +55,7 @@ public class CompletedChallenge {
     /**
      * Returns the userId of the user that completed the challenge
      *
-     * @return the userId that completed the challenge
+     * @return The userId that completed the challenge
      */
     public long getUserId() {
         return userId;
@@ -65,7 +65,7 @@ public class CompletedChallenge {
     /**
      * Returns the id of the challenge which was completed
      *
-     * @return the id of the challenge
+     * @return The id of the challenge
      */
     public long getChallengeId() {
         return challengeId;
@@ -74,7 +74,7 @@ public class CompletedChallenge {
     /**
      * Returns the time the challenge was completed
      *
-     * @return time of the challenge completion
+     * @return Time of challenge completion
      */
     public Date getCompletedAt() {
         return completedAt;

@@ -27,6 +27,14 @@ public class ChallengesServlet extends HttpServlet {
         controller = new StorageController();
     }
 
+    /**
+     * Handles GET requests to the challenge servlet
+     *
+     * @param request The GET request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if(request.getSession(false).getAttribute("id") != null) {
@@ -58,6 +66,14 @@ public class ChallengesServlet extends HttpServlet {
 
     }
 
+    /**
+     * Handles POST requests to the challenge servlet
+     *
+     * @param request The POST request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if(request.getSession(false).getAttribute("id") != null) {
@@ -72,6 +88,14 @@ public class ChallengesServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Shows all challenges in the database
+     *
+     * @param request The request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void showAllChallenges(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<Challenge> challenges = controller.getAllChallenges();
@@ -83,6 +107,14 @@ public class ChallengesServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Shows a specific challenge from the database
+     *
+     * @param request The request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void showChallenge(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long challengeId = Long.parseLong(request.getParameter("challengeId"));
@@ -97,6 +129,14 @@ public class ChallengesServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Starts a challenge
+     *
+     * @param request The request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void startChallenge(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String message = "";
@@ -119,6 +159,14 @@ public class ChallengesServlet extends HttpServlet {
 
     }
 
+    /**
+     * Show a users active challenges
+     *
+     * @param request The request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void showActiveChallenges(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long sessionUserId = (long) request.getSession(false).getAttribute("id");
@@ -127,6 +175,14 @@ public class ChallengesServlet extends HttpServlet {
         request.getRequestDispatcher("/includes/pages/ActiveChallenge/active-challenges.jsp").forward(request, response);
     }
 
+    /**
+     * Set a given challenge to completed status
+     *
+     * @param request The request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void completeChallenge(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long challengeId = Long.parseLong(request.getParameter("challengeId"));
@@ -146,12 +202,27 @@ public class ChallengesServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Show the form to create a new challenge
+     *
+     * @param request The request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/includes/pages/CreateChallenge/create-challenge.jsp").forward(request, response);
     }
 
-
+    /**
+     * Create a new challenge in the database
+     *
+     * @param request The request
+     * @param response The response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void createChallenge(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
