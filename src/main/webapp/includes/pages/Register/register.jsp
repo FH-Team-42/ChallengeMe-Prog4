@@ -49,7 +49,7 @@
 </head>
 <body>
 <div class="card">
-    <form class="pure-form" action="register" method="post">
+    <form class="pure-form" action="/register" method="post">
         <input type="text" placeholder="Name" id="username" name="username" required>
         <input type="password" placeholder="Passwort" id="password" name="password" required>
         <input type="password" placeholder="Passwort bestätigen" id="confirm_password" required>

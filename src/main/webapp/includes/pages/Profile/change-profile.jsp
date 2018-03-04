@@ -11,7 +11,7 @@
     <title>Change Profile</title>
 </head>
 <body>
-<%@include file="includes/header.jsp"%>
+<%@include file="../../header.jsp"%>
 
 
 
@@ -55,6 +55,6 @@
 
 
 
-<%@include file="includes/footer.jsp"%>
+<%@include file="../../footer.jsp"%>
 </body>
 </html>

@@ -42,7 +42,7 @@ public class ChangeProfileServlet extends HttpServlet {
 
         if (actualUser.getUserId() == userID) {
             request.setAttribute("actualUser", actualUser);
-            request.getRequestDispatcher("change-profile.jsp").forward(request, response);
+            request.getRequestDispatcher("includes/pages/Profile/change-profile.jsp").forward(request, response);
         } else {
             response.getWriter().print("Actual User not found");
         }

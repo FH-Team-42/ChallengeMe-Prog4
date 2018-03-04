@@ -47,11 +47,13 @@ public class ChallengesServlet extends HttpServlet {
                 case "complete":
                     completeChallenge(request, response);
                     break;
+                case "showCreate":
+                    showCreateForm(request, response);
             }
 
         } else {
             request.setAttribute("message", "Bitte zuerst einloggen!");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
 
     }
@@ -66,7 +68,7 @@ public class ChallengesServlet extends HttpServlet {
             }
         } else {
             request.setAttribute("message", "Bitte zuerst einloggen!");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 
@@ -75,7 +77,7 @@ public class ChallengesServlet extends HttpServlet {
         ArrayList<Challenge> challenges = controller.getAllChallenges();
         if(!challenges.isEmpty()) {
             request.setAttribute("challengeList", challenges);
-            request.getRequestDispatcher("challenges.jsp").forward(request, response);
+            request.getRequestDispatcher("/includes/pages/ShowChallenge/challenges.jsp").forward(request, response);
         } else {
             response.getWriter().print("No challenges in Database");
         }
@@ -89,7 +91,7 @@ public class ChallengesServlet extends HttpServlet {
             String creatorUsername = controller.getUserById(desiredChallenge.getIdCreator()).getName();
             request.setAttribute("creatorUsername", creatorUsername);
             request.setAttribute("desiredChallenge", desiredChallenge);
-            request.getRequestDispatcher("single-challenge.jsp").forward(request, response);
+            request.getRequestDispatcher("/includes/pages/ShowChallenge/single-challenge.jsp").forward(request, response);
         } else {
             response.getWriter().print("There was an error with your Challenge");
         }
@@ -112,7 +114,7 @@ public class ChallengesServlet extends HttpServlet {
 
             ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
             request.setAttribute("activeChallenges", activeChallenges);
-            request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
+            request.getRequestDispatcher("/includes/pages/ActiveChallenge/active-challenges.jsp").forward(request, response);
         }
 
     }
@@ -122,7 +124,7 @@ public class ChallengesServlet extends HttpServlet {
         long sessionUserId = (long) request.getSession(false).getAttribute("id");
         ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
         request.setAttribute("activeChallenges", activeChallenges);
-        request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
+        request.getRequestDispatcher("/includes/pages/ActiveChallenge/active-challenges.jsp").forward(request, response);
     }
 
     private void completeChallenge(HttpServletRequest request, HttpServletResponse response)
@@ -139,9 +141,14 @@ public class ChallengesServlet extends HttpServlet {
 
             ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
             request.setAttribute("activeChallenges", activeChallenges);
-            request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
+            request.getRequestDispatcher("/includes/pages/ActiveChallenge/active-challenges.jsp").forward(request, response);
 
         }
+    }
+
+    private void showCreateForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/includes/pages/CreateChallenge/create-challenge.jsp").forward(request, response);
     }
 
 
@@ -157,6 +164,6 @@ public class ChallengesServlet extends HttpServlet {
         controller.createChallenge(new Challenge(title, description, completionTime, idCreator));
 
         request.getSession(false).setAttribute("message", "Challenge wurde erfolgreich hinzugefügt.");
-        response.sendRedirect("challenges?action=showAll");
+        response.sendRedirect("/challenges?action=showAll");
     }
 }

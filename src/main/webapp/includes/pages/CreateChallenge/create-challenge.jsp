@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="includes/header.jsp"%>
+<%@include file="../../header.jsp"%>
 
-<form method="post" action="challenges?action=create">
+<form method="post" action="/challenges?action=create">
     <input type="number" value="1" style="visibility: hidden;" id="id" name="id"/><br>
     <input type="text" placeholder="Titel" id="title" name="title" required /><br>
     <input type="text" placeholder="Beschreibung" id="description" name="description" required /><br>
@@ -17,4 +17,4 @@
 </form>
 
 
-<%@include file="includes/footer.jsp"%>
+<%@include file="../../footer.jsp"%>

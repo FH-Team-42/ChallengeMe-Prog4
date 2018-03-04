@@ -132,7 +132,7 @@ public class User extends AbstractUserEntity {
      *
      * @return profilePicture URL
      */
-    public String getProfilePic() {
+    public String getProfilePicture() {
         return profilePic;
     }
 

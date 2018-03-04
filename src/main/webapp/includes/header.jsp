@@ -23,9 +23,9 @@
     <ul class="nav nav-pills">
         <li class="nav-item"><a href="challenges?action=showActive" class="nav-link">Meine aktiven Challenges</a></li>
         <li class="nav-item"><a href="challenges?action=showAll" class="nav-link">Challenges anzeigen</a></li>
-        <li class="nav-item"><a href="create-challenge.jsp" class="nav-link">Challenge erstellen</a></li>
-        <li class="nav-item"><a href="profile" class="nav-link">Profile</a></li>
-        <li class="nav-item"><a href="login?action=logout" class="nav-link">LogOut</a></li>
+        <li class="nav-item"><a href="challenges?action=showCreate" class="nav-link">Challenge erstellen</a></li>
+        <li class="nav-item"><a href="profile" class="nav-link">Profil</a></li>
+        <li class="nav-item"><a href="login?action=logout" class="nav-link">Logout</a></li>
     </ul>
 
     <h3>${sessionScope.message}</h3>

@@ -57,7 +57,7 @@
         <input type="password" placeholder="Passwort" id="password" name="password" required>
 
         <button type="submit" class="pure-button pure-button-primary">Anmelden</button>
-        <button onclick="location.href='register.jsp'">Registrieren</button>
+        <button onclick="location.href='includes/pages/Register/register.jsp'">Registrieren</button>
     </form>
 
 </div>

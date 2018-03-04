@@ -9,7 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@include file="includes/header.jsp"%>
+<%@include file="../../header.jsp"%>
 
 <html>
 <head>
@@ -62,15 +62,15 @@ Design: https://www.w3schools.com/howto/howto_css_profile_card.asp
 
 
 <div class="card">
-    <img src="<% out.print(actualUser.getProfilePic()); %>" alt="Profilbild" style="width:100%">
+    <img src="<% out.print(actualUser.getProfilePicture()); %>" alt="Profilbild" style="width:100%">
     <h1><% out.print(actualUser.getName()); %></h1>
     <p class="title "> Geburtsdatum: <% out.print(actualUser.getBirthday()); %></p>
     <p class="title">Geschaffte Challenges: ${completedChallenges}</p>
 
-    <p><button onclick="location.href='change-profile'">Ändern</button></p>
+    <p><button onclick="location.href='/change-profile'">Ändern</button></p>
 </div>
 
 
 </body>
 </html>
-<%@include file="includes/footer.jsp"%>
+<%@include file="../../footer.jsp"%>

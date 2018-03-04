@@ -41,7 +41,7 @@ public class ProfileServlet extends HttpServlet {
         if(actualUser.getUserId() == userID) {
             request.setAttribute("completedChallenges", completedChallenges);
             request.setAttribute("actualUser", actualUser);
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            request.getRequestDispatcher("includes/pages/Profile/profile.jsp").forward(request, response);
         } else {
             response.getWriter().print("Actual User not found");
         }

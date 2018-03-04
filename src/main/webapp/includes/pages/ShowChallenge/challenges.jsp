@@ -9,7 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="includes/header.jsp"%>
+<%@include file="../../header.jsp"%>
 <table class="table">
     <thead class="thead">
         <tr>
@@ -28,7 +28,7 @@
         Challenge challenge = challenges.get(i);
     %>
     <!-- create an html table row -->
-    <tr scope="row" class='clickable-row' data-href='challenges?action=show&challengeId=<%out.print(challenge.getChallengeId());%>'>
+    <tr scope="row" class='clickable-row' data-href='/challenges?action=show&challengeId=<%out.print(challenge.getChallengeId());%>'>
         <!-- create cells of row -->
         <td><% out.print(challenge.getChallengeId()); %></td>
         <td><% out.print(challenge.getTitle()); %></td>
@@ -64,4 +64,4 @@
     });
 </script>
 
-<%@include file="includes/footer.jsp"%>
+<%@include file="../../footer.jsp"%>
