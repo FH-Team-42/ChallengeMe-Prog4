@@ -29,37 +29,43 @@ public class ChallengesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getSession(false).getAttribute("id") != null) {
 
-        String message = "";
+            switch (request.getParameter("action")) {
+                case "showAll":
+                    showAllChallenges(request, response);
+                    break;
+                case "show":
+                    showChallenge(request, response);
+                    break;
+                case "start":
+                    startChallenge(request, response);
+                    break;
+                case "showActive":
+                    showActiveChallenges(request, response);
+                    break;
+                case "complete":
+                    completeChallenge(request, response);
+            }
 
-        switch(request.getParameter("action")) {
-            case "showAll":
-                showAllChallenges(request, response);
-                break;
-            case "show":
-                showChallenge(request, response);
-                break;
-            case "start":
-                startChallenge(request, response);
-                break;
-            case "showActive":
-                showActiveChallenges(request, response);
-                break;
-            case "complete":
-                completeChallenge(request, response);
-
-
+        } else {
+            request.setAttribute("message", "Bitte zuerst einloggen!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        switch(request.getParameter("action")) {
-            case "create":
-                createChallenge(request, response);
-                break;
+        if(request.getSession(false).getAttribute("id") != null) {
+            switch (request.getParameter("action")) {
+                case "create":
+                    createChallenge(request, response);
+                    break;
+            }
+        } else {
+            request.setAttribute("message", "Bitte zuerst einloggen!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
@@ -91,7 +97,7 @@ public class ChallengesServlet extends HttpServlet {
     private void startChallenge(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String message = "";
-        long sessionUserId = (int) request.getSession(false).getAttribute("userId");
+        long sessionUserId = (long) request.getSession(false).getAttribute("id");
         long challengeId = Long.parseLong(request.getParameter("challengeId"));
         Challenge startedChallenge = controller.getChallengeById(challengeId);
         if(startedChallenge.isCompleted()) {
@@ -112,7 +118,7 @@ public class ChallengesServlet extends HttpServlet {
 
     private void showActiveChallenges(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        long sessionUserId = (int) request.getSession(false).getAttribute("userId");
+        long sessionUserId = (long) request.getSession(false).getAttribute("id");
         ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
         request.setAttribute("activeChallenges", activeChallenges);
         request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
@@ -122,7 +128,7 @@ public class ChallengesServlet extends HttpServlet {
             throws ServletException, IOException {
         long challengeId = Long.parseLong(request.getParameter("challengeId"));
         Challenge completedChallenge = controller.getChallengeById(challengeId);
-        long sessionUserId = (int) request.getSession(false).getAttribute("userId");
+        long sessionUserId = (long) request.getSession(false).getAttribute("id");
 
         if(completedChallenge.getIdChallenged() == sessionUserId) {
             User user = controller.getUserById(sessionUserId);
@@ -154,6 +160,6 @@ public class ChallengesServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         session.setAttribute("message", "Challenge wurde erfolgreich hinzugefügt.");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("create-challenge.jsp");
     }
 }

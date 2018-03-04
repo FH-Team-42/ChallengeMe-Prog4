@@ -1,7 +1,6 @@
 package models;
 
 import administration.daos.AbstractUserEntity;
-import utilities.MathUtils;
 
 import javax.persistence.*;
 import java.util.Date;

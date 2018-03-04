@@ -2,12 +2,9 @@ package data;
 
 import models.Challenge;
 import models.User;
-
-import java.text.SimpleDateFormat;
+import utilities.Utils;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
 
 public class DataProvider {
 
@@ -19,9 +16,9 @@ public class DataProvider {
         //Collection<User> allUsers ;
 
 
-        this.user1 = new User("max", "123456", new Date(1995, 3, 29));
-        this.user2 = new User("david", "passWort1", new Date(1995, 1, 2));
-        this.user3 = new User("felix", "098765", new Date(1997, 4, 9));
+        this.user1 = new User("max", "123456", Utils.parseDate("29-03-1995"));
+        this.user2 = new User("david", "passWort1", Utils.parseDate("02-01-1995"));
+        this.user3 = new User("felix", "098765", Utils.parseDate("09-04-1997"));
 
         Collection<User> allUsers = new ArrayList<User>() {{
             add(user1);

@@ -63,11 +63,9 @@
 </div>
 
 
-
-</body>
-</html>
-
 <br>
 <h1>${sessionScope.message}</h1>
 
-<%@include file="includes/footer.jsp"%>
+
+</body>
+</html>

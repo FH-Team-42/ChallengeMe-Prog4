@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="includes/header.jsp"%>
 
-
 <form method="post" action="challenges?action=create">
     <input type="number" value="1" style="visibility: hidden;" id="id" name="id"/><br>
     <input type="text" placeholder="Titel" id="title" name="title" required /><br>

@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         String password = request.getParameter("password");
         String username = request.getParameter("username");
 
@@ -75,6 +76,10 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+            switch(request.getParameter("action")) {
+                case "logout":
+                    request.getSession(false).removeAttribute("id");
+                    response.sendRedirect("index.jsp");
+        }
     }
 }

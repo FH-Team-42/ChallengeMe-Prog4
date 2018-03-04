@@ -24,5 +24,7 @@
         <li class="nav-item"><a href="challenges?action=showAll" class="nav-link">Challenges anzeigen</a></li>
         <li class="nav-item"><a href="create-challenge.jsp" class="nav-link">Challenge erstellen</a></li>
         <li class="nav-item"><a href="profile" class="nav-link">Profile</a></li>
-        <li class="nav-item"><a href="index" class="nav-link">LogOut</a></li>
+        <li class="nav-item"><a href="login?action=logout" class="nav-link">LogOut</a></li>
     </ul>
+
+    <h3>${sessionScope.message}</h3>
