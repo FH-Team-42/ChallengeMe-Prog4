@@ -15,18 +15,37 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+
+    <link rel="stylesheet" type="text/css" href="/css/layout.css"/>
+
     <!-- JQuery include -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="challenges?action=showActive" class="nav-link">Meine aktiven Challenges</a></li>
+            <li class="nav-item"><a href="challenges?action=showAll" class="nav-link">Challenges anzeigen</a></li>
+            <li class="nav-item"><a href="challenges?action=showCreate" class="nav-link">Challenge erstellen</a></li>
+            <li class="nav-item"><a href="profile" class="nav-link">Profil</a></li>
+            <li class="nav-item"><a href="login?action=logout" class="nav-link">Logout</a></li>
+        </ul>
+    </div>
 
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="challenges?action=showActive" class="nav-link">Meine aktiven Challenges</a></li>
-        <li class="nav-item"><a href="challenges?action=showAll" class="nav-link">Challenges anzeigen</a></li>
-        <li class="nav-item"><a href="challenges?action=showCreate" class="nav-link">Challenge erstellen</a></li>
-        <li class="nav-item"><a href="profile" class="nav-link">Profil</a></li>
-        <li class="nav-item"><a href="login?action=logout" class="nav-link">Logout</a></li>
-    </ul>
 
-    <h3>${sessionScope.message}</h3>
-    <c:remove var="message" scope="session" />
+<% if(request.getSession(false).getAttribute("message") != null) { %>
+
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="alert alert-success fade in">
+                <p><strong>${sessionScope.message}</strong></p>
+                <c:remove var="message" scope="session" />
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+
+<% } %>
+
+<div class="placeholder"></div>

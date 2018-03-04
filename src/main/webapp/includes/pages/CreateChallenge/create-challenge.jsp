@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../header.jsp"%>
 
-<form method="post" action="/challenges?action=create">
-    <input type="number" value="1" style="visibility: hidden;" id="id" name="id"/><br>
-    <input type="text" placeholder="Titel" id="title" name="title" required /><br>
-    <input type="text" placeholder="Beschreibung" id="description" name="description" required /><br>
-    <input type="number" placeholder="Zeit in s" id="time" name="time" required /><br>
-    <input type="submit" value="Bestätigen" id="submit" name="submit" />
-</form>
+<div class="card">
+    <form method="post" action="/challenges?action=create">
+        <input type="text" placeholder="Titel" id="title" name="title" required /><br>
+        <input type="text" placeholder="Beschreibung" id="description" name="description" required /><br>
+        <input type="number" placeholder="Zeit in s" id="time" name="time" required /><br>
+        <button type="submit" class="pure-button pure-button-primary" value="Bestätigen" id="submit" name="submit">Bestätigen</button>
+    </form>
+</div>
 
 
 <%@include file="../../footer.jsp"%>

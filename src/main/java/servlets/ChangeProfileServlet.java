@@ -81,12 +81,16 @@ public class ChangeProfileServlet extends HttpServlet {
 
            controller.updateUser(actualUser);
 
+           request.getSession(false).setAttribute("message", "Passwort erfolgreich geändert!");
+
            response.sendRedirect("profile");
 
         } else if(actualUser != null && profilePicture != null)  {
             actualUser.setProfilePic(profilePicture);
 
             controller.updateUser(actualUser);
+
+            request.getSession(false).setAttribute("message", "Profilbild erfolgreich geändert!");
 
            response.sendRedirect("profile");
         } else {

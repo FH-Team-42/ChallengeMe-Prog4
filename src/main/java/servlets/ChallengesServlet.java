@@ -59,10 +59,10 @@ public class ChallengesServlet extends HttpServlet {
                     showCreateForm(request, response);
             }
 
-        } else {
-            request.setAttribute("message", "Bitte zuerst einloggen!");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }
+            } else {
+                request.getSession(false).setAttribute("message", "Bitte zuerst einloggen!");
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            }
 
     }
 
@@ -83,7 +83,7 @@ public class ChallengesServlet extends HttpServlet {
                     break;
             }
         } else {
-            request.setAttribute("message", "Bitte zuerst einloggen!");
+            request.getSession(false).setAttribute("message", "Bitte zuerst einloggen!");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
@@ -145,7 +145,7 @@ public class ChallengesServlet extends HttpServlet {
         Challenge startedChallenge = controller.getChallengeById(challengeId);
         if(startedChallenge.isCompleted()) {
             message = "Challenge wurde bereits abgeschlossen. Wähle eine andere";
-            request.setAttribute("message", message);
+            request.getSession(false).setAttribute("message", message);
             showChallenge(request, response);
         } else {
             startedChallenge.setIdChallenged(sessionUserId);
@@ -229,7 +229,7 @@ public class ChallengesServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         int completionTime = Integer.parseInt(request.getParameter("time"));
-        long idCreator = Long.parseLong(request.getParameter("id"));
+        long idCreator = (long) request.getSession(false).getAttribute("id");
 
 
         controller.createChallenge(new Challenge(title, description, completionTime, idCreator));
