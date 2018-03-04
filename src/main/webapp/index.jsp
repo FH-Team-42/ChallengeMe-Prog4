@@ -6,65 +6,49 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>LogIn</title>
 
-    <style>
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            max-width: 300px;
-            margin: auto;
-            text-align: center;
-        }
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 
-        button {
-            border: none;
-            outline: 0;
-            display: inline-block;
-            padding: 8px;
-            color: white;
-            background-color: #000;
-            text-align: center;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-        }
-
-        input {
-            text-align: center;
-            width: 95%;
-            font-size: 18px;
-            margin: 3px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        button:hover, a:hover {
-            opacity: 0.7;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/layout.css"/>
 </head>
 <body>
 
-
-<div class="card">
-    <form class="pure-form" action="login" method="post">
-        <input type="text" placeholder="Name" id="username" name="username" required>
-        <input type="password" placeholder="Passwort" id="password" name="password" required>
-
-        <button type="submit" class="pure-button pure-button-primary">Anmelden</button>
-        <button onclick="location.href='includes/pages/Register/register.jsp'">Registrieren</button>
-    </form>
-
+<% if(request.getSession(false).getAttribute("message") != null) { %>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <div class="alert alert-success fade in">
+            <p><strong>${sessionScope.message}</strong></p>
+            <c:remove var="message" scope="session" />
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
 </div>
+<% } %>
 
+<div class="placeholder"></div>
 
-<br>
-<h1>${message}</h1>
+<div class="row">
+    <div class="card">
+        <form class="pure-form" action="login" method="post">
+            <input type="text" placeholder="Name" id="username" name="username" required>
+            <input type="password" placeholder="Passwort" id="password" name="password" required>
+
+            <button type="submit" class="pure-button pure-button-primary">Anmelden</button>
+            <button onclick="location.href='includes/pages/Register/register.jsp'">Registrieren</button>
+        </form>
+
+    </div>
+</div>
 
 
 </body>

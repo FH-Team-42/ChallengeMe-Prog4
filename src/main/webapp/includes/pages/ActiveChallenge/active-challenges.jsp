@@ -53,7 +53,7 @@
                 out.print(format.format(endDate));
             %>
         </td>
-        <td><button><a href="/challenges?action=complete&challengeId=<% out.print(challenge.getChallengeId()); %>">Abschließen</a></button></td>
+        <td><button><a class="button-link" href="/challenges?action=complete&challengeId=<% out.print(challenge.getChallengeId()); %>">Abschließen</a></button></td>
         <!-- close row -->
     </tr>
     <!-- close the loop -->

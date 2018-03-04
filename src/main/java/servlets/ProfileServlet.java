@@ -27,23 +27,30 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        StorageController controller = new StorageController();
+        if(request.getSession(false).getAttribute("id") != null) {
+
+            StorageController controller = new StorageController();
 
 
-        //Gets Sessions and load actual user ID
-        HttpSession session = request.getSession(false);
-        Long userID = (Long) session.getAttribute("id");
+            //Gets Sessions and load actual user ID
+            HttpSession session = request.getSession(false);
+            Long userID = (Long) session.getAttribute("id");
 
 
-        User actualUser = controller.getUserById(userID);
-        int completedChallenges = controller.getCompletedChallengesByUserId(userID);
+            User actualUser = controller.getUserById(userID);
+            int completedChallenges = controller.getCompletedChallengesByUserId(userID);
 
-        if(actualUser.getUserId() == userID) {
-            request.setAttribute("completedChallenges", completedChallenges);
-            request.setAttribute("actualUser", actualUser);
-            request.getRequestDispatcher("includes/pages/Profile/profile.jsp").forward(request, response);
+            if(actualUser.getUserId() == userID) {
+                request.setAttribute("completedChallenges", completedChallenges);
+                request.setAttribute("actualUser", actualUser);
+                request.getRequestDispatcher("includes/pages/Profile/profile.jsp").forward(request, response);
+            } else {
+                response.getWriter().print("Actual User not found");
+            }
+
         } else {
-            response.getWriter().print("Actual User not found");
+            request.getSession(false).setAttribute("message", "Bitte zuerst einloggen!");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 }

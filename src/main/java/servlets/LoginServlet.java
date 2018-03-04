@@ -43,31 +43,28 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
 
 
-
+        boolean success = false;
 
         //Check if login name and password fits with one of the user list
         //if it is fitting, get session with user, if not alert failure
         for (User u: userList) {
 
-            if(u.getName().equals(username))
-            {
-               if(u.getPass().equals(password))
-               {
-                   HttpSession session = request.getSession();
-                   session.setAttribute("id", u.getUserId());
-                   response.sendRedirect("profile");
-
-               }
-               else
-               {
-                   response.getWriter().print("Falsches Passwort: " + password + ", " + u.getPass());
-               }
-                break;
-            } else {
-                response.getWriter().print("User nicht vorhanden");
+            if(u.getName().equals(username)) {
+                if (u.getPass().equals(password)) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("id", u.getUserId());
+                    success = true;
+                }
             }
-            break;
         }
+
+        if(success) {
+            response.sendRedirect("profile");
+        } else {
+            request.getSession(false).setAttribute("message", "Username oder Passwort falsch!");
+            response.sendRedirect("/");
+        }
+
 
 
 
