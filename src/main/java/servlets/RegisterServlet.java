@@ -34,12 +34,12 @@ public class RegisterServlet extends HttpServlet {
             String name = request.getParameter("username");
             String password = request.getParameter("password");
             String birthdayString = request.getParameter("birthday");
-            Date date = new Date(2000, 1, 1);
+            //Date date = new Date(2000, 1, 1);
 
 
             //TODO geburtstag eintragen
-            //SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
-            //Date date = in.parse(birthdayString);
+            SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = in.parse(birthdayString);
 
 
             //create new User
