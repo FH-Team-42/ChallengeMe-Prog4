@@ -20,6 +20,11 @@ import java.text.*;
 /**
  * Created by davidwenkemann on 03.03.18.
  */
+
+/**
+ * This servlet handels the registration. It proofs if the passwords were two times the same and if the username
+ * is already used.
+ */
 @WebServlet(name = "RegisterServlet",
         urlPatterns = "/register"
 )
@@ -35,6 +40,9 @@ public class RegisterServlet extends HttpServlet {
 
         HttpSession session=request.getSession();
         StorageController controller = new StorageController();
+        ArrayList<User> userList;
+        userList = controller.getAllUsers();
+
 
 
         //getData from register form
@@ -44,13 +52,22 @@ public class RegisterServlet extends HttpServlet {
 
         Date date = Utils.parseDate(birthdayString);
 
+        for (User u: userList) {
+            if(u.getName().equals(name))
+            {
+                request.getSession(false).setAttribute("message", "Username schon vorhanden");
+
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                return;
+            }
+        }
+
 
         //create new User
         User newUser = new User(name, password, date);
         controller.createUser(newUser);
 
 
-        ArrayList<User> userList;
         userList = controller.getAllUsers();
         for (User u: userList) {
             if(u.getName().equals(name))

@@ -17,6 +17,12 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by davidwenkemann on 03.03.18.
  */
+
+
+/**
+ * This servlet checks out if the right username and password are given. If its wrong an exception is thrown. If its true, you will
+ * be logged in. It also handels the logout.
+ */
 @WebServlet(
         name = "LoginServlet",
         urlPatterns = "/login"

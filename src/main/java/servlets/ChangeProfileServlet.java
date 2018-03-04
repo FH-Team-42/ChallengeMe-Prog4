@@ -14,6 +14,12 @@ import java.io.IOException;
 /**
  * Created by davidwenkemann on 02.03.18.
  */
+
+
+/**
+ * This servlet handles the changes of the profile. It proofs if the password or the profile picture is changend.
+ * Further the methods for the database interface are called.
+ */
 @WebServlet(
         name = "ChangeProfileServlet",
         urlPatterns = "/change-profile"

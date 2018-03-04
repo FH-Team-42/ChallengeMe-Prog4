@@ -1,5 +1,10 @@
 package servlets;
 
+/**
+ * This servlet is used when the aplication is deployed and starts and calls all
+ * important methods and variables
+ */
+
 import administration.StorageController;
 import data.DataProvider;
 import models.Challenge;
@@ -8,7 +13,6 @@ import models.User;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.ServletContextListener;
-import javax.servlet.http.HttpSession;
 import java.util.Collection;
 
 @WebListener
