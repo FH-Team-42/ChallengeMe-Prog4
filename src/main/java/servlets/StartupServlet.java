@@ -14,6 +14,10 @@ import java.util.Collection;
 @WebListener
 public class StartupServlet implements ServletContextListener {
 
+    /**
+     * Initializes the servlets
+     * @param event The servlet context event
+     */
     public void contextInitialized(ServletContextEvent event) {
 
         DataProvider provider = new DataProvider();

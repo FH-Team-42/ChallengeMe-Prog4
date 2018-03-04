@@ -24,6 +24,14 @@ import javax.servlet.http.HttpSession;
 public class ProfileServlet extends HttpServlet {
 
 
+    /**
+     * Handles GET requests to the profile servlet
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

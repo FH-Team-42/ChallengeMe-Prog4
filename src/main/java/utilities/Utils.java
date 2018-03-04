@@ -10,7 +10,11 @@ import java.util.Random;
  */
 public class Utils {
 
-
+    /**
+     * Converts a date string into a date object
+     * @param pattern The date string
+     * @return A date object if successful, else null
+     */
     public static Date parseDate(String pattern) {
         try {
             return new SimpleDateFormat("dd-MM-yyyy").parse(pattern);

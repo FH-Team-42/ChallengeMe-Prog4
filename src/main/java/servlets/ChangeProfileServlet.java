@@ -32,6 +32,14 @@ public class ChangeProfileServlet extends HttpServlet {
         controller = new StorageController();
     }
 
+    /**
+     * Handles GET requests to the profile change servlet
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Gets Sessions and load actual user ID
@@ -48,6 +56,14 @@ public class ChangeProfileServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Handles POST requests to the profile change servlet
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

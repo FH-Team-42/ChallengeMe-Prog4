@@ -1,10 +1,11 @@
 package models;
 
-import javax.persistence.*;
-
 import administration.daos.AbstractChallengeEntity;
-import jdk.jfr.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 
@@ -63,8 +64,8 @@ public class Challenge extends AbstractChallengeEntity {
     }
 
     /**
-     * completes the challenge through removing the challengerId
-     * and setting isCompleted true
+     * Completes the challenge by removing the challengerId
+     * and setting isCompleted to true
      *
      */
     public void complete() {
@@ -91,9 +92,9 @@ public class Challenge extends AbstractChallengeEntity {
     }
 
     /**
-     * Get the challenge creator's ID
+     * Get the challenge creators ID
      *
-     * @return The challenge creator's ID
+     * @return The challenge creators ID
      */
     public Long getIdCreator() {
     	return idCreator;
@@ -101,9 +102,9 @@ public class Challenge extends AbstractChallengeEntity {
     }
 
     /**
-     * Get the challenged person's user ID
+     * Get the challenged persons user ID
      *
-     * @return The challenged person's user ID
+     * @return The challenged persons user ID
      */
     public Long getIdChallenged() {
     	return idChallenged;
@@ -111,9 +112,9 @@ public class Challenge extends AbstractChallengeEntity {
     }
 
     /**
-     * Get the current voting of the challenge
+     * Get the current voting for the challenge
      *
-     * @return The current voting of the challenge
+     * @return The current voting for the challenge
      */
     /*public int getVote() {
         return vote;
@@ -159,7 +160,7 @@ public class Challenge extends AbstractChallengeEntity {
     }
 
     /**
-     * Set the description of the title
+     * Set the description of the challenge
      *
      * @param setDescription The new description
      */
@@ -179,9 +180,9 @@ public class Challenge extends AbstractChallengeEntity {
     }
 
     /**
-     * Set the challenged user's ID
+     * Set the challenged users ID
      *
-     * @param setIdChallenged The challenged user's ID
+     * @param setIdChallenged The challenged users ID
      */
     public void setIdChallenged(Long setIdChallenged) {
         idChallenged = setIdChallenged;
