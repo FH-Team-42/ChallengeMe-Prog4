@@ -20,9 +20,9 @@ public class DataProvider {
         //Collection<User> allUsers ;
 
 
-        this.user1 = new User("max", "123456", Utils.parseDate("29-03-1995"));
-        this.user2 = new User("david", "passWort1", Utils.parseDate("02-01-1995"));
-        this.user3 = new User("felix", "098765", Utils.parseDate("09-04-1997"));
+        this.user1 = new User("max", "123456", Utils.parseDate("1995-03-29"));
+        this.user2 = new User("david", "passWort1", Utils.parseDate("1995-01-02"));
+        this.user3 = new User("felix", "098765", Utils.parseDate("1997-04-09"));
 
         Collection<User> allUsers = new ArrayList<User>() {{
             add(user1);
