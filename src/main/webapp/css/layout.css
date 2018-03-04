@@ -1,3 +1,7 @@
+body {
+    background-image: url("http://www.webdesigndev.com/wp-content/uploads/2015/02/Subtle-Light-Tile-Pattern-Vol2.jpg");
+}
+
 .card {
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -5,6 +9,7 @@
     margin: auto;
     text-align: center;
     padding: 5px;
+    background-color: lightgray;
 }
 
 button {
