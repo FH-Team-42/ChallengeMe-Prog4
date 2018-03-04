@@ -27,7 +27,7 @@ public class Main {
         ArrayList<User> allUser = controller.getAllUsers();
 
         for(Challenge c : challenge) {
-            System.out.println("ID: " + c.getChallengeId() + ", Creator: " + c.getCreatorId() +", Creation Date: " + c.getCreated() +", Update Date: " + c.getUpdated());
+            System.out.println("ID: " + c.getChallengeId() + ", Creator: " + c.getIdCreator() +", Creation Date: " + c.getCreated() +", Update Date: " + c.getUpdated());
         }
 
     }

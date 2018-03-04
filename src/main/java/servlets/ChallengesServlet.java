@@ -2,6 +2,8 @@ package servlets;
 
 import administration.StorageController;
 import models.Challenge;
+import models.CompletedChallenge;
+import models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,6 +45,8 @@ public class ChallengesServlet extends HttpServlet {
             case "showActive":
                 showActiveChallenges(request, response);
                 break;
+            case "complete":
+                completeChallenge(request, response);
 
 
         }
@@ -86,17 +90,24 @@ public class ChallengesServlet extends HttpServlet {
 
     private void startChallenge(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        long idChallengedUser = (int) request.getSession(false).getAttribute("userId");
+        String message = "";
+        long sessionUserId = (int) request.getSession(false).getAttribute("userId");
         long challengeId = Long.parseLong(request.getParameter("challengeId"));
         Challenge startedChallenge = controller.getChallengeById(challengeId);
-        startedChallenge.setIdChallenged(idChallengedUser);
-        startedChallenge.setStarted(new Date());
-        controller.updateChallenge(startedChallenge);
+        if(startedChallenge.isCompleted()) {
+            message = "Challenge wurde bereits abgeschlossen. Wähle eine andere";
+            request.getSession(false).setAttribute("message", message);
+            showChallenge(request, response);
+        } else {
+            startedChallenge.setIdChallenged(sessionUserId);
+            startedChallenge.setStarted(new Date());
+            controller.updateChallenge(startedChallenge);
 
+            ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
+            request.setAttribute("activeChallenges", activeChallenges);
+            request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
+        }
 
-        ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(idChallengedUser);
-        request.setAttribute("activeChallenges", activeChallenges);
-        request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
     }
 
     private void showActiveChallenges(HttpServletRequest request, HttpServletResponse response)
@@ -105,6 +116,28 @@ public class ChallengesServlet extends HttpServlet {
         ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
         request.setAttribute("activeChallenges", activeChallenges);
         request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
+    }
+
+    private void completeChallenge(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        long challengeId = Long.parseLong(request.getParameter("challengeId"));
+        Challenge completedChallenge = controller.getChallengeById(challengeId);
+        long sessionUserId = (int) request.getSession(false).getAttribute("userId");
+
+        if(completedChallenge.getIdChallenged() == sessionUserId) {
+            User user = controller.getUserById(sessionUserId);
+            user.completeChallenge();
+            controller.updateUser(user);
+            completedChallenge.complete();
+            controller.updateChallenge(completedChallenge);
+            CompletedChallenge challenge = new CompletedChallenge(sessionUserId, completedChallenge.getChallengeId());
+            controller.createCompletedChallenge(challenge);
+
+            ArrayList<Challenge> activeChallenges = controller.getActiveChallengesByUserId(sessionUserId);
+            request.setAttribute("activeChallenges", activeChallenges);
+            request.getRequestDispatcher("active-challenges.jsp").forward(request, response);
+
+        }
     }
 
 

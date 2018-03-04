@@ -56,9 +56,14 @@ public class Challenge extends AbstractChallengeEntity {
         this.description = description;
         this.completionTime = completionTime;
         this.idCreator = idCreator;
-        idChallenged = (long) 0;
+        idChallenged = 0L;
         vote = 0;
         isCompleted = false;
+    }
+
+    public void complete() {
+        isCompleted = true;
+        idChallenged = 0L;
     }
 
     /**

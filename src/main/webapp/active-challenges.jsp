@@ -13,6 +13,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="includes/header.jsp"%>
+<!--get the collection from the attribute from appropriate scope (here, request) -->
+<% ArrayList<Challenge> challenges = (ArrayList<Challenge>) request.getAttribute("activeChallenges");
+    if(!challenges.isEmpty()) { %>
 <table class="table">
     <thead class="thead">
     <tr>
@@ -24,10 +27,7 @@
         <th scope="col">Fertigstellen</th>
     </tr>
     </thead>
-
-    <!--get the collection from the attribute from appropriate scope (here, request) -->
-    <% ArrayList<Challenge> challenges = (ArrayList<Challenge>) request.getAttribute("activeChallenges");
-        //<!--iterate over the arraylist-->
+    <%    //<!--iterate over the arraylist-->
         for (int i = 0; i < challenges.size(); i++) {
             Challenge challenge = challenges.get(i);
     %>
@@ -53,11 +53,14 @@
                 out.print(format.format(endDate));
             %>
         </td>
-        <td><button>Abschließen</button></td>
+        <td><button><a href="challenges?action=complete&challengeId=<% out.print(challenge.getChallengeId()); %>">Abschließen</a></button></td>
         <!-- close row -->
     </tr>
     <!-- close the loop -->
-    <% } %>
+    <% }
+    } else {%>
+     <h1>Keine aktiven Challenges</h1>
+    <%}%>
     <!-- close table -->
 </table>
 
