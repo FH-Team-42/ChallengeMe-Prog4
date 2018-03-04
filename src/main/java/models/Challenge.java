@@ -3,7 +3,9 @@ package models;
 import javax.persistence.*;
 
 import administration.daos.AbstractChallengeEntity;
-//import administration.timerListener;
+import jdk.jfr.Timestamp;
+
+import java.util.Date;
 
 
 @Entity
@@ -31,6 +33,9 @@ public class Challenge extends AbstractChallengeEntity {
     @Column
     private boolean isCompleted;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startedAt;
+
 
     //connectDataBase database = new connectDataBase(); //connection to the database
 
@@ -51,36 +56,15 @@ public class Challenge extends AbstractChallengeEntity {
         this.description = description;
         this.completionTime = completionTime;
         this.idCreator = idCreator;
-        idChallenged = (long) 0;
+        idChallenged = 0L;
         vote = 0;
-
-       /* if (!database.dataBaseQueryString("SELECT * FROM challenges WHERE title='" + this.title + "'", "title").equals(this.title)) {
-            idChallenge = getNewChallengeID();
-            String insertString = "INSERT INTO challenges (ChallengeID, challenged, creator, title, description, completionTime, votes) VALUES("
-                    + idChallenge + ", " + idChallenged + ", " + idCreator + ", '" + title + "', '" + description + "', " + completionTime + ", " + vote + ")";
-            database.insertQuery(insertString);
-        }else{
-            idChallenge = database.dataBaseQueryInt("SELECT * FROM challenges WHERE title='" + this.title + "'", "ChallengeID");
-        }*/
+        isCompleted = false;
     }
 
-    /**
-     * Starts the countdown for the challenge
-     */
-    public void startChallenge() {
-        /* timerListener listener = new timerListener(completionTime);
-        Timer timer = new Timer(1000, listener);
-        timer.start(); */
+    public void complete() {
+        isCompleted = true;
+        idChallenged = 0L;
     }
-
-    /**
-     * Gets the next free ID from the challenge database
-     *
-     * @return Free challenge ID
-     */
-    //public int getNewChallengeID() {
-    //    return idChallenge;
-    //}
 
     /**
      * Get the title of the challenge
@@ -89,7 +73,6 @@ public class Challenge extends AbstractChallengeEntity {
      */
     public String getTitle() {
     	return title;
-
     }
 
     /**
@@ -106,26 +89,17 @@ public class Challenge extends AbstractChallengeEntity {
      *
      * @return The challenge creator's ID
      */
-    public Long getCreatorId() {
+    public Long getIdCreator() {
     	return idCreator;
 
     }
-
-    /**
-     * Get the challenge's ID
-     *
-     * @return The challenge's ID
-     */
-    //public long getUserId() {
-    //	return idChallenge;
-    //}
 
     /**
      * Get the challenged person's user ID
      *
      * @return The challenged person's user ID
      */
-    public Long getChallengedId() {
+    public Long getIdChallenged() {
     	return idChallenged;
 
     }
@@ -147,6 +121,25 @@ public class Challenge extends AbstractChallengeEntity {
      */
     public int getCompletionTime() {
         return completionTime;
+    }
+
+
+    /**
+     * Get the start time of the challenge
+     *
+     * @return Start time in Date-Format
+     */
+    public Date getStarted() {
+        return startedAt;
+    }
+
+    /**
+     * Returns if the challenge is already completed.
+     *
+     * @return Value of isCompleted
+     */
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     /**
@@ -182,12 +175,22 @@ public class Challenge extends AbstractChallengeEntity {
     /**
      * Set the challenged user's ID
      *
-     * @param setChallengedId The challenged user's ID
+     * @param setIdChallenged The challenged user's ID
      */
-    public void setChallengedId(Long setChallengedId) {
-        idChallenged = setChallengedId;
+    public void setIdChallenged(Long setIdChallenged) {
+        idChallenged = setIdChallenged;
 
     }
+
+    /**
+     * Set the challenges start date
+     *
+     * @param setStartedAt The Date the challenge was started
+     */
+    public void setStarted(Date setStartedAt) {
+        startedAt = setStartedAt;
+    }
+
 
     /**
      * Vote the challenge

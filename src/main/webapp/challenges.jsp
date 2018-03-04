@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.Challenge" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%--
   Created by IntelliJ IDEA.
   User: Max
@@ -13,12 +14,10 @@
     <thead class="thead">
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">CompletionTime</th>
-            <th scope="col">CreationTime</th>
-            <th scope="col">creatorID</th>
-            <th scope="col">challengedID</th>
+            <th scope="col">Titel</th>
+            <th scope="col">Beschreibung</th>
+            <th scope="col">Erstelldatum</th>
+            <th scope="col">Abgeschlossen</th>
         </tr>
     </thead>
 
@@ -29,20 +28,40 @@
         Challenge challenge = challenges.get(i);
     %>
     <!-- create an html table row -->
-    <tr>
+    <tr scope="row" class='clickable-row' data-href='challenges?action=show&challengeId=<%out.print(challenge.getChallengeId());%>'>
         <!-- create cells of row -->
-        <td scope="row"><% out.print(challenge.getChallengeId()); %></td>
+        <td><% out.print(challenge.getChallengeId()); %></td>
         <td><% out.print(challenge.getTitle()); %></td>
         <td><% out.print(challenge.getDescription()); %></td>
-        <td><% out.print(challenge.getCompletionTime()); %></td>
-        <td><% out.print(challenge.getCreated()); %></td>
-        <td><% out.print(challenge.getCreatorId()); %></td>
-        <td><% out.print(challenge.getChallengedId()); %></td>
+        <td>
+            <%
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                out.print(format.format(challenge.getCreated()));
+
+            %>
+        </td>
+        <td>
+            <%
+                if(challenge.isCompleted()) {
+                    out.print("Ja");
+                } else {
+                    out.print("Nein");
+                }
+            %>
+        </td>
         <!-- close row -->
     </tr>
     <!-- close the loop -->
     <% } %>
     <!-- close table -->
 </table>
+
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
 
 <%@include file="includes/footer.jsp"%>

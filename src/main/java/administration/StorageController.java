@@ -3,8 +3,10 @@ package administration;
 import administration.daos.DataController;
 import administration.daos.IGenericDao;
 import models.Challenge;
+import models.CompletedChallenge;
 import models.User;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,12 +16,14 @@ import java.util.Collection;
  */
 public class StorageController {
 
-    IGenericDao<Challenge> challengeDao = null;
-    IGenericDao<User> userDao = null;
+    IGenericDao<Challenge> challengeDao;
+    IGenericDao<User> userDao;
+    IGenericDao<CompletedChallenge> completedDao;
 
     public StorageController() {
         challengeDao = DataController.getInstance().getChallengeDao();
         userDao = DataController.getInstance().getUserDao();
+        completedDao = DataController.getInstance().getCompletedDao();
     }
 
     public void createAllChallenges(Collection<Challenge> challenges) {
@@ -49,6 +53,41 @@ public class StorageController {
 
     public void updateChallenge(Challenge challenge) {
         challengeDao.update(challenge);
+    }
+
+    public void createChallenge (Challenge challenge) {
+        challengeDao.create(challenge);
+    }
+
+    public void createUser (User user) {
+        userDao.create(user);
+    }
+
+    public void updateUser (User user) {
+        userDao.update(user);
+    }
+
+    public ArrayList<Challenge> getActiveChallengesByUserId(long idChallenged) {
+        ArrayList<Challenge> allChallenges = new ArrayList<Challenge>(challengeDao.findAll());
+        ArrayList<Challenge> activeChallenges = new ArrayList<Challenge>();
+        for (Challenge c : allChallenges) {
+            if (c.getIdChallenged() == idChallenged) {
+                activeChallenges.add(c);
+            }
+        }
+        return activeChallenges;
+    }
+
+    public void deleteChallenge(Challenge challenge) {
+        challengeDao.delete(challenge);
+    }
+
+    public void deleteChallengeById(long id) {
+        challengeDao.delete(id);
+    }
+
+    public void createCompletedChallenge(CompletedChallenge completed) {
+        completedDao.create(completed);
     }
 
 }

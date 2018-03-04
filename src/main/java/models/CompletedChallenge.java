@@ -4,18 +4,39 @@ import javax.persistence.*;
 
 import administration.daos.AbstractChallengeEntity;
 
+import java.util.Date;
+
 @Entity (name = "completed_challenges")
-public class CompletedChallenge extends AbstractChallengeEntity {
+public class CompletedChallenge {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long completedId;
 
     @Column
-    private int userId;
+    private long userId;
 
     @Column
-    private int challnegeId;
+    private long challnegeId;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date completedAt;
 
     public CompletedChallenge() {
 
+    }
 
+    public CompletedChallenge(long userId, long challnegeId) {
+        this.userId = userId;
+        this.challnegeId = challnegeId;
+        completedAt = new Date();
+    }
+
+    public long getCompletedId() {
+        return completedId;
+    }
+
+    public void setCompletedId(long id) {
+        completedId = id;
     }
 }

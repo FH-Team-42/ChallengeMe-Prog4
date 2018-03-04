@@ -1,6 +1,7 @@
 package administration.daos;
 
 import models.Challenge;
+import models.CompletedChallenge;
 import models.User;
 
 import javax.persistence.EntityManagerFactory;
@@ -54,6 +55,11 @@ public class DataController
     {
         return new GenericDao<User>( User.class,
                 this.entityManagerFactory.createEntityManager() );
+    }
+
+    public IGenericDao<CompletedChallenge> getCompletedDao() {
+        return new GenericDao<CompletedChallenge>(CompletedChallenge.class,
+                this.entityManagerFactory.createEntityManager());
     }
 
 }

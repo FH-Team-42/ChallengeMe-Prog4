@@ -8,12 +8,14 @@ import models.User;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.ServletContextListener;
+import javax.servlet.http.HttpSession;
 import java.util.Collection;
 
 @WebListener
 public class StartupServlet implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent event) {
+
         DataProvider provider = new DataProvider();
         StorageController controller = new StorageController();
 

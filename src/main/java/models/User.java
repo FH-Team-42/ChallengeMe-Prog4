@@ -55,36 +55,13 @@ public class User extends AbstractUserEntity {
         challengesCompleted = 0;
         challengeCurrent = 0;
         reputation = 100;
-        /*if (!database.dataBaseQueryString("SELECT username FROM users WHERE username='" + username + "'", "username").equals(username)) {
-            userID = generateUserID();
-            String insertString = "INSERT INTO users (userID, username, password, birthday, birthmonth, birthyear, profilepic, challengesCompleted, challengeAssinged, reputation) VALUES("
-                    + userID + ", '" + username + "', '" + password + "', " + birthday + ", '" + profilePic + "', "
-                    + challengesCompleted + ", " + challengeAssigned + ", " + reputation + ")";
-            database.insertQuery(insertString);
-        } else {
-            userID = database.dataBaseQueryInt("SELECT userID FROM users WHERE username='" + username + "'", "userID");
-        }*/
-
     }
 
-    /**
-     * Assigns a new random challenge to a user
-     *
-     *
-     * @return Challenge ID assigned to user
-     */
-    public int setNewChallenge() {
-        int newID;
-        if (challengeCurrent == 0) {
-            //generate new challenge
-            newID = MathUtils.getRandomInt(100)+1;
-            challengeCurrent = newID;
-            return newID;
-        } else {
-            //user already has a challenge assigned, return a nope
-            return -1;
-        }
+
+    public void completeChallenge() {
+        challengesCompleted++;
     }
+
 
     /**
      * Remove a challenge from a user
@@ -100,18 +77,6 @@ public class User extends AbstractUserEntity {
             reputation -= 2;
             return 0;
         }
-    }
-
-    /**
-     * Generates a user ID
-     *
-     * @return The user ID
-     */
-    private int generateUserID() {
-        int nextFreeIDFromDatabase = 0;
-        String query = "SELECT * FROM users ORDER BY userID DESC";
-        //nextFreeIDFromDatabase = database.searchLastIndex(query);
-        return nextFreeIDFromDatabase + 1;
     }
 
     /**
