@@ -24,6 +24,12 @@ public class DataProvider {
         this.user2 = new User("david", "passWort1", Utils.parseDate("1995-01-02"));
         this.user3 = new User("felix", "098765", Utils.parseDate("1997-04-09"));
 
+        user1.setProfilePic("https://www.dealdoktor.de/app/uploads/avatars/39808/db034ddb5954458-250.jpg");
+        user2.setProfilePic("http://www.portablegaming.de/attachments/art/20548d1179213839-profilbild-south-park-manier-sp_moe.jpg");
+        user3.setProfilePic("http://www.galeria-metta.com/wp-content/uploads/2015/11/profilbild.jpg");
+
+
+
         Collection<User> allUsers = new ArrayList<User>() {{
             add(user1);
             add(user2);
