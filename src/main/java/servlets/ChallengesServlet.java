@@ -143,7 +143,11 @@ public class ChallengesServlet extends HttpServlet {
         long sessionUserId = (long) request.getSession(false).getAttribute("id");
         long challengeId = Long.parseLong(request.getParameter("challengeId"));
         Challenge startedChallenge = controller.getChallengeById(challengeId);
-        if(startedChallenge.isCompleted()) {
+        if(startedChallenge.getIdCreator() == sessionUserId) {
+            message = "Du kannst deine eigenen Challenges nicht starten. Wähle eine andere!";
+            request.getSession(false).setAttribute("message", message);
+            showChallenge(request, response);
+        }else if(startedChallenge.isCompleted()) {
             message = "Challenge wurde bereits abgeschlossen. Wähle eine andere!";
             request.getSession(false).setAttribute("message", message);
             showChallenge(request, response);
