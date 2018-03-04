@@ -17,7 +17,7 @@ public class Utils {
      */
     public static Date parseDate(String pattern) {
         try {
-            return new SimpleDateFormat("dd-MM-yyyy").parse(pattern);
+            return new SimpleDateFormat("yyyy-MM-dd").parse(pattern);
         } catch (ParseException e) {
             return null;
         }
