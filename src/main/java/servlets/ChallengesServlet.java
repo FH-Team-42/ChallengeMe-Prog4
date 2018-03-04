@@ -105,7 +105,7 @@ public class ChallengesServlet extends HttpServlet {
         Challenge startedChallenge = controller.getChallengeById(challengeId);
         if(startedChallenge.isCompleted()) {
             message = "Challenge wurde bereits abgeschlossen. Wähle eine andere";
-            request.setAttribute("message", message);
+            request.getSession(false).setAttribute("message", message);
             showChallenge(request, response);
         } else {
             startedChallenge.setIdChallenged(sessionUserId);
