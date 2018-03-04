@@ -22,8 +22,17 @@ public class User extends AbstractUserEntity {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
     @Column
     private String profilePic;          //link to profile pic
+
 
     @Column
     private int challengesCompleted;    //count of the challenges the user hat completed
@@ -129,20 +138,20 @@ public class User extends AbstractUserEntity {
      *
      * @param name The username
      */
-    //public void setName(String name) {
-    //    username = name;
+    public void setName(String name) {
+        username = name;
     //    String query = "UPDATE users SET username='" + name +  "' WHERE userID=" + userID;
-    //}
+    }
 
     /**
      * Sets the users Password
      *
      * @param pass The password
      */
-    //public void setPass(String pass) {
-    //    password = pass;
-    //    String query = "UPDATE users SET password='" + pass +  "' WHERE userID=" + userID;
-    //}
+    public void setPass(String pass) {
+        password = pass;
+        //String query = "UPDATE users SET password='" + pass +  "' WHERE userID=" + userID;
+    }
 
 
     /**
@@ -155,6 +164,13 @@ public class User extends AbstractUserEntity {
 
     }
 
+    public int getChallengesCompleted() {
+        return challengesCompleted;
+    }
+
+    public void setChallengesCompleted(int challengesCompleted) {
+        this.challengesCompleted = challengesCompleted;
+    }
 
     public void voteForUser(int vote){
         reputation += vote;

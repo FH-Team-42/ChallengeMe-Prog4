@@ -59,14 +59,6 @@ public class StorageController {
         challengeDao.create(challenge);
     }
 
-    public void createUser (User user) {
-        userDao.create(user);
-    }
-
-    public void updateUser (User user) {
-        userDao.update(user);
-    }
-
     public ArrayList<Challenge> getActiveChallengesByUserId(long idChallenged) {
         ArrayList<Challenge> allChallenges = new ArrayList<Challenge>(challengeDao.findAll());
         ArrayList<Challenge> activeChallenges = new ArrayList<Challenge>();
@@ -89,5 +81,14 @@ public class StorageController {
     public void createCompletedChallenge(CompletedChallenge completed) {
         completedDao.create(completed);
     }
+
+    public void updateUser(User user) {
+        userDao.update(user);
+    }
+
+    public void createUser(User user) {
+        userDao.create(user);
+    }
+
 
 }
